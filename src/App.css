@@ -53,11 +53,32 @@
 }
 .moviePoster{
   display: grid;
-  align-items: center
+  align-items: center;
+  height: 295px;
 }
-.moviePoster>img{
+.moviePosterDownloding{
+  display: grid;
+  width: 50%;
+  justify-self: center;
+  animation: downloding 3s infinite;
+}
+
+@keyframes downloding{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+.moviePosterImg{
   width: 200px;
   height: 295px;
+}
+.moviePosterError{
+  display: grid;
+  width: 50%;
+  justify-self: center;
 }
 .movieTitle{
   display: grid;

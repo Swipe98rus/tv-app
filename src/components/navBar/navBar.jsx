@@ -18,6 +18,7 @@ constructor(props){
     this.saveSimilarMovieInState = this.saveSimilarMovieInState.bind(this);
     this.saveMovieList = this.saveMovieList.bind(this);
     this.setMovieWithAllData = this.setMovieWithAllData.bind(this);
+    this.firstLoadingApp = this.firstLoadingApp.bind(this);
 }
 
 //---------------------------------------Additional function-------------------------------------
@@ -49,6 +50,9 @@ async saveMovieList(){
 
 
 async setMovieWithAllData(){
+    if(this.props.state.listOfMovies.listOfPictures){
+        await this.savePicturesInState([]);
+    }
     const result = await this.saveMovieList();
 
     //Code save data in state (PICTURES for movie)
@@ -66,6 +70,12 @@ async onSearchClick(event){
         this.setMovieWithAllData();
     }
 }
+async firstLoadingApp (){
+    await this.props.setName('');        
+    await this.setMovieWithAllData();
+    await this.props.checkInFirstLoad(false);
+}
+
 
 
 async getValueYears(event){

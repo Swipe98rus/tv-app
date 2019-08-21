@@ -5,13 +5,15 @@ import {
     PUT_YEARS_FOR_MOVIE,
     PUT_NAME_FOR_MOVIE,
     PUT_CHOOSE_SORT_FOR_MOVIE,
-    CHANGE_CURRENT_PAGE
+    CHANGE_CURRENT_PAGE,
+    CHANGE_FIRST_LOAD_APP
                             } from './actions'
 
 const defaultState = {
     listOfMovie: [],
     listOfPictures: [],
     listOfSimilarMovie: [],
+    firstLoad: true,
     name:'',
     years: '',
     sort: '',
@@ -62,6 +64,12 @@ export const putMoviesReducers = (state = defaultState, action)=>{
             return {
             ...state,
             currentPage: action.payload,
+            }
+        // eslint-disable-next-line no-duplicate-case
+        case CHANGE_FIRST_LOAD_APP:
+            return {
+            ...state,
+            firstLoad: action.payload,
             }
     }
     return state;

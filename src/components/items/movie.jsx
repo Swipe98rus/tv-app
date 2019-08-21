@@ -1,4 +1,6 @@
 import React from 'react';
+import downloding from '../../img/downloding.svg';
+import error from '../../img/error.svg'
 
 
 
@@ -9,6 +11,18 @@ const Movie = (props)=>{
     let firstSimilar = '';
     let secondSimilar = '';
     let thridSimilar = '';
+    let conditionUrl;
+    let conditionClassName;
+    if(url === undefined){
+        conditionUrl = downloding;
+        conditionClassName = 'moviePosterDownloding';
+    }else if(url === ''){
+        conditionUrl = error;
+        conditionClassName = 'moviePosterError';
+    }else{
+        conditionUrl = url;
+        conditionClassName = 'moviePosterImg';
+    }
 
     if(props.similar[props.index]){
         if(props.similar[props.index][0]){
@@ -25,7 +39,9 @@ const Movie = (props)=>{
     return(
         <div className="OneOfMovie">
             <div className="moviePoster">
-                <img src={url} alt='Poster for film not FOUNDED'/>
+                <img className={conditionClassName}
+                     src={conditionUrl} 
+                     alt='Poster for film not FOUNDED'/>
             </div>
             <div className="movieTitle">
                 <h2>{title}</h2>
@@ -35,9 +51,9 @@ const Movie = (props)=>{
             </div>
             <div className="Similar">
                 <h3>Similar movies</h3>
-                <p>{firstSimilar? firstSimilar : 'Searching..'}</p>
-                <p>{secondSimilar? secondSimilar : 'Searching..'}</p>
-                <p>{thridSimilar? thridSimilar : 'Searching..'}</p>
+                <p>{firstSimilar ? firstSimilar : 'Searching..'}</p>
+                <p>{secondSimilar ? secondSimilar : 'Searching..'}</p>
+                <p>{thridSimilar ? thridSimilar : 'Searching..'}</p>
             </div>
         </div>
     )

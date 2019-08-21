@@ -6,7 +6,8 @@ import { setListMovie,
          setListSimilarMovie, 
          setYears, 
          setName,
-         setSort      } from '../../redux/listMovies/actions';
+         setSort,
+         checkInFirstLoad      } from '../../redux/listMovies/actions';
 
 class NavBarContainer extends React.Component{
 render() {
@@ -17,7 +18,8 @@ render() {
                 setListSimilarMovie={this.props.setListSimilarMovie}
                 setYears={this.props.setYears} 
                 setName={this.props.setName}
-                setSort={this.props.setSort} />
+                setSort={this.props.setSort}
+                checkInFirstLoad={this.props.checkInFirstLoad} />
     )
 }}
 
@@ -33,6 +35,7 @@ const mapDispatchToProps = {
     setYears,
     setName,
     setSort,
+    checkInFirstLoad,
 };
 
 export default connect( mapStateToProps, mapDispatchToProps )(NavBarContainer);

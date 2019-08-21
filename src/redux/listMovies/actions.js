@@ -5,6 +5,7 @@ export const PUT_YEARS_FOR_MOVIE = 'PUT_YEARS_FOR_MOVIE';
 export const PUT_NAME_FOR_MOVIE = 'PUT_NAME_FOR_MOVIE';
 export const PUT_CHOOSE_SORT_FOR_MOVIE = 'PUT_CHOOSE_SORT_FOR_MOVIE';
 export const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE';
+export const CHANGE_FIRST_LOAD_APP = 'CHANGE_FIRST_LOAD_APP';
 
 
 
@@ -35,4 +36,8 @@ export const setSort = (sort)=>({
 export const setCurrentPage = (page)=>({
     type: CHANGE_CURRENT_PAGE,
     payload: page,
+})
+export const checkInFirstLoad = (boolean)=>({
+    type: CHANGE_FIRST_LOAD_APP,
+    payload: boolean,
 })
