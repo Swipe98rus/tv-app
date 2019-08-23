@@ -22,51 +22,51 @@ constructor(props){
 }
 
 //---------------------------------------Additional function-------------------------------------
-async savePicturesInState(result){
-    const pictures = await getPictures(result);
-    await this.props.setPicturesMovie(pictures);
+async savePicturesInState( result ){
+    const pictures = await getPictures( result );
+    await this.props.setPicturesMovie( pictures );
 }
 
 
-async saveSimilarMovieInState(result){
-    const similarMovie = await getSimilar(result);
-    await this.props.setListSimilarMovie(similarMovie);
+async saveSimilarMovieInState( result ){
+    const similarMovie = await getSimilar( result );
+    await this.props.setListSimilarMovie( similarMovie );
 }
 
 
 async saveMovieList(){
-    if(this.props.state.listOfMovies.years){
+    if( this.props.years ){
         //Code save data in state (List of MOVIE with YEAR)
-        const result = await getListOfMovies(this.props.state.listOfMovies.name, this.props.state.listOfMovies.years);
-        await this.props.setListMovie(result);
+        const result = await getListOfMovies( this.props.name, this.props.years );
+        await this.props.setListMovie( result );
         return result;
     }else{
         //Code save data in state (List of MOVIE)
-        const result = await getListOfMovies(this.props.state.listOfMovies.name);
-        await this.props.setListMovie(result);
+        const result = await getListOfMovies( this.props.name );
+        await this.props.setListMovie( result );
         return result;
     }
 }
 
 
 async setMovieWithAllData(){
-    if(this.props.state.listOfMovies.listOfPictures){
+    if( this.props.listOfPictures ){
         await this.savePicturesInState([]);
     }
     const result = await this.saveMovieList();
 
     //Code save data in state (PICTURES for movie)
-    this.savePicturesInState(result);
+    this.savePicturesInState( result );
         
     //Code save data in state (List of SIMILAR movie)
-    this.saveSimilarMovieInState(result);
+    this.saveSimilarMovieInState( result );
 }
 
 
 //---------------------------------------MAIN function-------------------------------------
-async onSearchClick(event){
-    if(event.which === 13){
-        await this.props.setName(event.target.value);        
+async onSearchClick(e){
+    if( e.which === 13 ){
+        await this.props.setName( e.target.value );        
         this.setMovieWithAllData();
     }
 }
@@ -78,23 +78,23 @@ async firstLoadingApp (){
 
 
 
-async getValueYears(event){
-    let valueLength = parseInt(event.target.value.length);
+async getValueYears(e){
+    let valueLength = parseInt( e.target.value.length );
 
-    if(valueLength > 4){
-        event.target.style.color = '#e17055';
-
-    // eslint-disable-next-line no-cond-assign
-    }else if(valueLength < 4 && valueLength >= 1){
-        event.target.style.color = '#e17055';
+    if( valueLength > 4 ){
+        e.target.style.color = '#e17055';
 
     // eslint-disable-next-line no-cond-assign
-    }else if(valueLength === 4){
-        event.target.style.color = '#00b894';
-        await this.props.setYears(event.target.value);
+    }else if( valueLength < 4 && valueLength >= 1 ){
+        e.target.style.color = '#e17055';
+
+    // eslint-disable-next-line no-cond-assign
+    }else if( valueLength === 4 ){
+        e.target.style.color = '#00b894';
+        await this.props.setYears( e.target.value );
     
     // eslint-disable-next-line no-cond-assign
-    }else if(valueLength === 0){
+    }else if( valueLength === 0 ){
         await this.props.setYears('');
     }
 }
@@ -109,31 +109,31 @@ onSearchClickYears(e){
 
 async onChooseInput(e){
     await this.props.setSort( e.target.value );
-    const listForSort = [...this.props.state.listOfMovies.listOfMovie];
+    const listForSort = [ ...this.props.listOfMovie ];
     const sortMethod = (a, b)=>{
         //Return by oldest
         return( a.movie.year - b.movie.year)
     }
     await listForSort.sort( sortMethod );
 
-    if(this.props.state.listOfMovies.sort === 'By newest'){
+    if(this.props.sort === 'By newest'){
         await listForSort.reverse();
-        await this.props.setListMovie(listForSort);
-
-        //Code save data in state (PICTURES for movie)
-        this.savePicturesInState(listForSort);
-
-        //Code save data in state (List of SIMILAR movie)
-        this.saveSimilarMovieInState(listForSort);
-
-    }else if(this.props.state.listOfMovies.sort === 'By oldest'){
         await this.props.setListMovie( listForSort );
 
         //Code save data in state (PICTURES for movie)
-        this.savePicturesInState(listForSort);
+        this.savePicturesInState( listForSort );
 
         //Code save data in state (List of SIMILAR movie)
-        this.saveSimilarMovieInState(listForSort);
+        this.saveSimilarMovieInState( listForSort );
+
+    }else if(this.props.sort === 'By oldest'){
+        await this.props.setListMovie( listForSort );
+
+        //Code save data in state (PICTURES for movie)
+        this.savePicturesInState( listForSort );
+
+        //Code save data in state (List of SIMILAR movie)
+        this.saveSimilarMovieInState( listForSort );
     }
 }
 

@@ -16,13 +16,14 @@ const paginate = (pageNumber)=>{
 
     return(
         <div>
-            <ListMovies currentMovies={currentMovies}
-                        url={this.props.listOfPictures}
-                        similar={this.props.listOfSimilarMovie}
-                        indexOfFirstMovie={indexOfFirstMovie}/>
-            <Pagination moviePerPage={this.props.moviePerPage}
-                        totalMovie={this.props.listOfMovies.length}
-                        paginate={paginate}/>
+            <ListMovies currentMovies = { currentMovies }
+                        url = { this.props.listOfPictures }
+                        similar = { this.props.listOfSimilarMovie }
+                        indexOfFirstMovie = { indexOfFirstMovie }   />
+
+            <Pagination moviePerPage = { this.props.moviePerPage }
+                        totalMovie = { this.props.listOfMovies.length }
+                        paginate = { paginate }    />
         </div>
     )
 }}

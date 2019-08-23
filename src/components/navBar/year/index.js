@@ -8,8 +8,8 @@ class NavBarYears extends React.Component{
                     <input type="number"
                         name="years"
                         placeholder="Choose the year"
-                        onChange={this.props.getValueYears}
-                        onKeyPress={this.props.onSearchClickYears}
+                        onChange = { this.props.getValueYears }
+                        onKeyPress = { this.props.onSearchClickYears }
                         max="2019"
                         min="1970" />
                 </div>

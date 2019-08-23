@@ -2,25 +2,23 @@ import React from 'react';
 import Movie from './movie';
 
 
-const ListMovies = ({ currentMovies, url, similar, indexOfFirstMovie }) => {
-    let index = 0;
-    let i = 0;
+class ListMovies extends React.Component{
+ render(){
     return(
         <div>
             {
-                currentMovies.map( film => {
-                    index = indexOfFirstMovie + i;
-                    i++;
+                this.props.currentMovies.map( (film, index) => {
+                   let i = this.props.indexOfFirstMovie + index;
                     return <Movie film={film} 
                                   key={film.movie.ids.trakt}
-                                  url={url}
-                                  similar={similar}
-                                  index={index}  
+                                  url={this.props.url}
+                                  similar={this.props.similar}
+                                  index={i}  
                             />
                         })
             }
         </div>
     )
+  }
 }
-
 export default ListMovies;
