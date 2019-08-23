@@ -14,7 +14,7 @@ render() {
     return(
         <NavBar name = { this.props.name }
                 years = { this.props.years }
-                listMovie = { this.props.listMovie }
+                listOfMovie = { this.props.listOfMovie }
                 sort = { this.props.sort }
                 setListMovie = { this.props.setListMovie }
                 setPicturesMovie = { this.props.setPicturesMovie }
@@ -28,10 +28,10 @@ render() {
 
 const mapStateToProps = state =>{
     return {
-        name: state.listOfMovies.name,
-        years: state.listOfMovies.years,
-        listMovie: state.listOfMovies.listMovie,
-        sort: state.listOfMovies.sort,
+        name: state.movieParams.name,
+        years: state.movieParams.years,
+        listOfMovie: state.movieParams.listOfMovie,
+        sort: state.movieParams.sort,
     };
 };
 const mapDispatchToProps = {

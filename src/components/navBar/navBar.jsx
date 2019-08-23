@@ -8,19 +8,6 @@ import { getSimilar } from './helpFun/getSimilar'
 
 
 class NavBar extends React.Component{
-constructor(props){
-    super(props)
-    this.onSearchClick = this.onSearchClick.bind(this);
-    this.getValueYears = this.getValueYears.bind(this);
-    this.onSearchClickYears = this.onSearchClickYears.bind(this);
-    this.onChooseInput = this.onChooseInput.bind(this);
-    this.savePicturesInState = this.savePicturesInState.bind(this);
-    this.saveSimilarMovieInState = this.saveSimilarMovieInState.bind(this);
-    this.saveMovieList = this.saveMovieList.bind(this);
-    this.setMovieWithAllData = this.setMovieWithAllData.bind(this);
-    this.firstLoadingApp = this.firstLoadingApp.bind(this);
-}
-
 //---------------------------------------Additional function-------------------------------------
 async savePicturesInState( result ){
     const pictures = await getPictures( result );
@@ -67,7 +54,7 @@ async setMovieWithAllData(){
 async onSearchClick(e){
     if( e.which === 13 ){
         await this.props.setName( e.target.value );        
-        this.setMovieWithAllData();
+        await this.setMovieWithAllData();
     }
 }
 async firstLoadingApp (){
@@ -110,6 +97,9 @@ onSearchClickYears(e){
 async onChooseInput(e){
     await this.props.setSort( e.target.value );
     const listForSort = [ ...this.props.listOfMovie ];
+    const listForReset = [ ...this.props.listOfMovie ];
+    console.log(listForReset);
+    console.log(this.props.listOfMovie)
     const sortMethod = (a, b)=>{
         //Return by oldest
         return( a.movie.year - b.movie.year)
@@ -141,10 +131,10 @@ async onChooseInput(e){
 render() {
     return(
         <div className='setting' id="navBarSetting">
-                <NavBarName onSearchClick={this.onSearchClick}/>
-                <NavBarYears getValueYears={this.getValueYears}
-                             onSearchClickYears={this.onSearchClickYears}/>
-                <NavBarSort onChooseInput={this.onChooseInput}/>
+                <NavBarName onSearchClick={ (e)=>{ this.onSearchClick(e) }}/>
+                <NavBarYears getValueYears={ (e)=>{ this.getValueYears(e) }}
+                             onSearchClickYears={ (e)=>{ this.onSearchClickYears(e) }}/>
+                <NavBarSort onChooseInput={ (e)=>{ this.onChooseInput(e) }}/>
         </div>
     )
 }}

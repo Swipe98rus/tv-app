@@ -6,10 +6,10 @@ import ListMovies from './listMovies';
 
 class  MovieContainer extends React.Component{
 render() {
-//GET CURRENT POSTS
+//GET CURRENT MOVIES
 const indexOfLastMovie = this.props.currentPage * this.props.moviePerPage;
 const indexOfFirstMovie = indexOfLastMovie - this.props.moviePerPage;
-const currentMovies = this.props.listOfMovies.slice(indexOfFirstMovie, indexOfLastMovie);
+const currentMovies = this.props.listOfMovie.slice(indexOfFirstMovie, indexOfLastMovie);
 const paginate = (pageNumber)=>{
     this.props.setCurrentPage(pageNumber);
 }
@@ -22,7 +22,7 @@ const paginate = (pageNumber)=>{
                         indexOfFirstMovie = { indexOfFirstMovie }   />
 
             <Pagination moviePerPage = { this.props.moviePerPage }
-                        totalMovie = { this.props.listOfMovies.length }
+                        totalMovie = { this.props.listOfMovie.length }
                         paginate = { paginate }    />
         </div>
     )
@@ -30,11 +30,11 @@ const paginate = (pageNumber)=>{
 
 const mapStateToProps = state =>{
     return {
-        listOfMovies: state.listOfMovies.listOfMovie,
-        listOfPictures: state.listOfMovies.listOfPictures,
-        listOfSimilarMovie: state.listOfMovies.listOfSimilarMovie,
-        currentPage: state.listOfMovies.currentPage,
-        moviePerPage: state.listOfMovies.moviePerPage
+        listOfMovie: state.movieParams.listOfMovie,
+        listOfPictures: state.movieParams.listOfPictures,
+        listOfSimilarMovie: state.movieParams.listOfSimilarMovie,
+        currentPage: state.movieParams.currentPage,
+        moviePerPage: state.movieParams.moviePerPage
     };
 };
 const mapDispatchToProps = {

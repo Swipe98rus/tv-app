@@ -1,12 +1,10 @@
-import downloding from '../../../img/downloding.svg';
 import error from '../../../img/error.svg'
 
 
 export const conditionImg = (url)=>{
     if(url === undefined){
-        const conditionUrl = downloding;
-        const conditionClassName = 'moviePosterDownloding';
-        return [conditionUrl, conditionClassName];
+        const conditionClassName = 'moviePosterImg';
+        return ['', conditionClassName ];
     }else if(url === ''){
         const conditionUrl = error;
         const conditionClassName = 'moviePosterError';

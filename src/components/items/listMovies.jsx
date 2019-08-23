@@ -9,11 +9,15 @@ class ListMovies extends React.Component{
             {
                 this.props.currentMovies.map( (film, index) => {
                    let i = this.props.indexOfFirstMovie + index;
-                    return <Movie film={film} 
-                                  key={film.movie.ids.trakt}
-                                  url={this.props.url}
-                                  similar={this.props.similar}
-                                  index={i}  
+                   let currentSimilar;
+                   if(this.props.similar[i] !== undefined){
+                    currentSimilar = this.props.similar[i];
+                    currentSimilar.splice( 3, currentSimilar.length );
+                   }
+                    return <Movie film={ film } 
+                                  key={ film.movie.ids.trakt }
+                                  url={ this.props.url[i] }
+                                  similar={ currentSimilar }
                             />
                         })
             }
