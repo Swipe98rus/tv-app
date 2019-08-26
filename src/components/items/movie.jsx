@@ -9,8 +9,10 @@ this.preloaderRef = React.createRef();
 }
 preloader(e){
     setTimeout( ()=>{
-        this.preloaderRef.current.style.opacity = '0';
-        this.preloaderRef.current.style.visibility = 'hidden';
+        if(this.preloaderRef.current){
+            this.preloaderRef.current.style.opacity = '0';
+            this.preloaderRef.current.style.visibility = 'hidden';
+        }
     }, 1500 )
 }
 

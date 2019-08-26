@@ -7,7 +7,7 @@ import { setListMovie,
          setYears, 
          setName,
          setSort,
-         checkInFirstLoad      } from '../../redux/listMovies/actions';
+         checkInFirstLoad,      } from '../../redux/listMovies/actions';
 
 class NavBarContainer extends React.Component{
 render() {
@@ -22,7 +22,8 @@ render() {
                 setYears = { this.props.setYears } 
                 setName = { this.props.setName }
                 setSort = { this.props.setSort }
-                checkInFirstLoad = { this.props.checkInFirstLoad } />
+                checkInFirstLoad = { this.props.checkInFirstLoad }
+                listOfPictures = { this.props.listOfPictures } />
     )
 }}
 
@@ -32,6 +33,7 @@ const mapStateToProps = state =>{
         years: state.movieParams.years,
         listOfMovie: state.movieParams.listOfMovie,
         sort: state.movieParams.sort,
+        listOfPictures: state.movieParams.listOfPictures
     };
 };
 const mapDispatchToProps = {

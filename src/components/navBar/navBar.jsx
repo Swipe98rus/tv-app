@@ -10,6 +10,9 @@ import { getSimilar } from './helpFun/getSimilar'
 class NavBar extends React.Component{
 //---------------------------------------Additional function-------------------------------------
 async savePicturesInState( result ){
+    if( this.props.listOfPictures ){
+        await this.props.setPicturesMovie( [] );
+    }
     const pictures = await getPictures( result );
     await this.props.setPicturesMovie( pictures );
 }
@@ -37,9 +40,6 @@ async saveMovieList(){
 
 
 async setMovieWithAllData(){
-    if( this.props.listOfPictures ){
-        await this.savePicturesInState([]);
-    }
     const result = await this.saveMovieList();
 
     //Code save data in state (PICTURES for movie)

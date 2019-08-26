@@ -14,10 +14,10 @@ class ListMovies extends React.Component{
                     currentSimilar = this.props.similar[i];
                     currentSimilar.splice( 3, currentSimilar.length );
                    }
-                    return <Movie film={ film } 
-                                  key={ film.movie.ids.trakt }
-                                  url={ this.props.url[i] }
-                                  similar={ currentSimilar }
+                    return <Movie film = { film } 
+                                  key = { film.movie.ids.trakt }
+                                  url = { this.props.url[i] }
+                                  similar = { currentSimilar }
                             />
                         })
             }

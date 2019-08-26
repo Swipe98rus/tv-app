@@ -12,14 +12,15 @@ const indexOfFirstMovie = indexOfLastMovie - this.props.moviePerPage;
 const currentMovies = this.props.listOfMovie.slice(indexOfFirstMovie, indexOfLastMovie);
 const paginate = (pageNumber)=>{
     this.props.setCurrentPage(pageNumber);
-}
+} 
 
     return(
         <div>
             <ListMovies currentMovies = { currentMovies }
                         url = { this.props.listOfPictures }
                         similar = { this.props.listOfSimilarMovie }
-                        indexOfFirstMovie = { indexOfFirstMovie }   />
+                        indexOfFirstMovie = { indexOfFirstMovie } 
+                        setPicturesMovie = { this.props.setPicturesMovie }  />
 
             <Pagination moviePerPage = { this.props.moviePerPage }
                         totalMovie = { this.props.listOfMovie.length }
@@ -38,7 +39,7 @@ const mapStateToProps = state =>{
     };
 };
 const mapDispatchToProps = {
-    setCurrentPage
+    setCurrentPage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer)
