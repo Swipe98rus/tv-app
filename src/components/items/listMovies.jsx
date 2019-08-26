@@ -18,6 +18,12 @@ class ListMovies extends React.Component{
                                   key = { film.movie.ids.trakt }
                                   url = { this.props.url[i] }
                                   similar = { currentSimilar }
+                                  setName = { this.props.setName }
+                                  setListMovie = { this.props.setListMovie }
+                                  setPicturesMovie = { this.props.setPicturesMovie }
+                                  setListSimilarMovie = { this.props.setListSimilarMovie }
+                                  name = { this.props.name }
+                                  listPictures = { this.props.url }
                             />
                         })
             }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { conditionImg } from './helpFun/conditionImg';
+import Similar from './similar';
 
 class Movie extends React.Component{
 constructor(props){
@@ -14,7 +15,7 @@ preloader(e){
             this.preloaderRef.current.style.visibility = 'hidden';
         }
     }, 1500 )
-}
+};
 
 render(){
     const title = this.props.film.movie.title;
@@ -42,14 +43,14 @@ render(){
                 <p>{year}</p>
             </div>
 
-            <div className="Similar">
-                <h3>Similar movies</h3>
-                { similar ? 
-                    (similar[0] ? 
-                        ( similar.map( film =>( <p key={film.id}>
-                                                    {film.title}
-                                                </p> ))) : 'Not found') : 'Searching..' }
-            </div>
+            <Similar similar={similar}
+                     setListMovie={this.props.setListMovie}
+                     setName = { this.props.setName } 
+                     setPicturesMovie = { this.props.setPicturesMovie } 
+                     setListSimilarMovie = { this.props.setListSimilarMovie }
+                     name = { this.props.name }
+                     listPictures = { this.props.url } />
+
         </div>
     )
 }}

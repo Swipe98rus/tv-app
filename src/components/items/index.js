@@ -1,7 +1,11 @@
 import React from 'react';
 import Pagination from './pagination.jsx'
 import { connect } from 'react-redux';
-import { setCurrentPage } from '../../redux/listMovies/actions'
+import { setCurrentPage,
+         setListMovie,
+         setPicturesMovie,
+         setListSimilarMovie } from '../../redux/listMovies/actions';
+import { setName } from '../../redux/paramsMovies/actions'
 import ListMovies from './listMovies';
 
 class  MovieContainer extends React.Component{
@@ -20,7 +24,11 @@ const paginate = (pageNumber)=>{
                         url = { this.props.listOfPictures }
                         similar = { this.props.listOfSimilarMovie }
                         indexOfFirstMovie = { indexOfFirstMovie } 
-                        setPicturesMovie = { this.props.setPicturesMovie }  />
+                        setPicturesMovie = { this.props.setPicturesMovie }
+                        setListMovie = { this.props.setListMovie }
+                        setName = { this.props.setName }
+                        setListSimilarMovie = { this.props.setListSimilarMovie }
+                        name = { this.props.name }  />
 
             <Pagination moviePerPage = { this.props.moviePerPage }
                         totalMovie = { this.props.listOfMovie.length }
@@ -35,11 +43,16 @@ const mapStateToProps = state =>{
         listOfPictures: state.listMovies.listOfPictures,
         listOfSimilarMovie: state.listMovies.listOfSimilarMovie,
         currentPage: state.listMovies.currentPage,
-        moviePerPage: state.listMovies.moviePerPage
+        moviePerPage: state.listMovies.moviePerPage,
+        name: state.paramsMovies.name,
     };
 };
 const mapDispatchToProps = {
     setCurrentPage,
+    setListMovie,
+    setName,
+    setPicturesMovie,
+    setListSimilarMovie
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer)

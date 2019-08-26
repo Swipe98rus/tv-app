@@ -1,11 +1,10 @@
 import React from 'react';
-import { getListOfMovies } from '../../APIs/getMovieAPI';
 import NavBarName from './name';
 import NavBarYears from './year';
 import NavBarSort from './sort';
 import { getPictures } from './helpFun/getPictures'
 import { getSimilar } from './helpFun/getSimilar'
-
+import { getListOfMovies } from '../../APIs/getMovieAPI';
 
 class NavBar extends React.Component{
 //---------------------------------------Additional function-------------------------------------
