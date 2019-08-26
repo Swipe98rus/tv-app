@@ -4,10 +4,12 @@ import NavBar from './navBar';
 import { setListMovie, 
          setPicturesMovie, 
          setListSimilarMovie, 
-         setYears, 
-         setName,
-         setSort,
          checkInFirstLoad,      } from '../../redux/listMovies/actions';
+import {
+    setYears, 
+    setName,
+    setSort,
+} from '../../redux/paramsMovies/actions';
 
 class NavBarContainer extends React.Component{
 render() {
@@ -29,11 +31,11 @@ render() {
 
 const mapStateToProps = state =>{
     return {
-        name: state.movieParams.name,
-        years: state.movieParams.years,
-        listOfMovie: state.movieParams.listOfMovie,
-        sort: state.movieParams.sort,
-        listOfPictures: state.movieParams.listOfPictures
+        name: state.paramsMovies.name,
+        years: state.paramsMovies.years,
+        listOfMovie: state.listMovies.listOfMovie,
+        sort: state.paramsMovies.sort,
+        listOfPictures: state.listMovies.listOfPictures
     };
 };
 const mapDispatchToProps = {

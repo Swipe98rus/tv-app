@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import { putMoviesReducers } from './listMovies/reducers'
+import { putParamsMovies } from './paramsMovies/reducers';
 
 export default combineReducers({
-    movieParams: putMoviesReducers,
+    listMovies: putMoviesReducers,
+    paramsMovies: putParamsMovies,
 })
 
 

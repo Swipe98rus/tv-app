@@ -31,11 +31,11 @@ const paginate = (pageNumber)=>{
 
 const mapStateToProps = state =>{
     return {
-        listOfMovie: state.movieParams.listOfMovie,
-        listOfPictures: state.movieParams.listOfPictures,
-        listOfSimilarMovie: state.movieParams.listOfSimilarMovie,
-        currentPage: state.movieParams.currentPage,
-        moviePerPage: state.movieParams.moviePerPage
+        listOfMovie: state.listMovies.listOfMovie,
+        listOfPictures: state.listMovies.listOfPictures,
+        listOfSimilarMovie: state.listMovies.listOfSimilarMovie,
+        currentPage: state.listMovies.currentPage,
+        moviePerPage: state.listMovies.moviePerPage
     };
 };
 const mapDispatchToProps = {
