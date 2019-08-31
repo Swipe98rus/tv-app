@@ -1,6 +1,7 @@
 import React from 'react';
 import { getPictures } from '../navBar/helpFun/getPictures'
 import { getSimilar } from '../navBar/helpFun/getSimilar'
+import { getTrailer } from '../navBar/helpFun/getTrailer'
 import { getListOfMovies } from '../../APIs/getMovieAPI';
 
 
@@ -34,9 +35,14 @@ class Similar extends React.Component{
             return result;
         }
     }
+    async saveTrailerForMovie(result){
+        const trailerMovie = await getTrailer( result );
+        await this.props.setTrailerForMovie( trailerMovie );
+    }
     
     
     async setMovieWithAllData(){
+        await this.props.setCurrentPage(1)
         const result = await this.saveMovieList();
     
         //Code save data in state (PICTURES for movie)
@@ -44,6 +50,9 @@ class Similar extends React.Component{
             
         //Code save data in state (List of SIMILAR movie)
         this.saveSimilarMovieInState( result );
+        
+        //Code save data in state (List of TRAILER for movie)
+        this.saveTrailerForMovie( result );
     }
     
     
@@ -51,7 +60,8 @@ class Similar extends React.Component{
     async onReSearchClick(e){
         await this.props.setName(e);        
         await this.setMovieWithAllData();
-        }    
+        } 
+           
     render(){
         return(
             <div className="Similar">

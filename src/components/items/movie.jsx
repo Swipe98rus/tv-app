@@ -33,7 +33,9 @@ render(){
                      setPicturesMovie = { this.props.setPicturesMovie } 
                      setListSimilarMovie = { this.props.setListSimilarMovie }
                      name = { this.props.name }
-                     listPictures = { this.props.url } />
+                     listPictures = { this.props.url }
+                     setTrailerForMovie = { this.props.setTrailerForMovie }
+                     setCurrentPage = { this.props.setCurrentPage } />
 
         </div>
     )

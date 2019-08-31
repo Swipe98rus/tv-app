@@ -25,6 +25,8 @@ class ListMovies extends React.Component{
                                   name = { this.props.name }
                                   listPictures = { this.props.url }
                                   trailer = { this.props.trailers[i] }
+                                  setTrailerForMovie = { this.props.setTrailerForMovie }
+                                  setCurrentPage = { this.props.setCurrentPage }
                             />
                         })
             }

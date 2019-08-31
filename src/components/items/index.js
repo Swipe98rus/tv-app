@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { setCurrentPage,
          setListMovie,
          setPicturesMovie,
-         setListSimilarMovie } from '../../redux/listMovies/actions';
+         setListSimilarMovie,
+         setTrailerForMovie  } from '../../redux/listMovies/actions';
 import { setName } from '../../redux/paramsMovies/actions'
 import ListMovies from './listMovies';
 
@@ -29,7 +30,9 @@ const paginate = (pageNumber)=>{
                         setName = { this.props.setName }
                         setListSimilarMovie = { this.props.setListSimilarMovie }
                         name = { this.props.name }
-                        trailers = { this.props.trailers }  />
+                        trailers = { this.props.trailers }
+                        setTrailerForMovie = { this.props.setTrailerForMovie }
+                        setCurrentPage = { this.props.setCurrentPage }  />
 
             <Pagination moviePerPage = { this.props.moviePerPage }
                         totalMovie = { this.props.listOfMovie.length }
@@ -54,7 +57,8 @@ const mapDispatchToProps = {
     setListMovie,
     setName,
     setPicturesMovie,
-    setListSimilarMovie
+    setListSimilarMovie,
+    setTrailerForMovie
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer)

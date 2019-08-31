@@ -128,7 +128,7 @@
   border-left-color: white;
 }
 .moviePoster:active .play-button:hover{
-  background-color: rgba(255, 0, 0, 0.6)
+  background-color: rgba(255, 0, 0, 0.6);
 }
 
 
@@ -203,13 +203,13 @@
 
 
 .modal-window-for-trailer{
-  width: 800px; 
-  height: 600px; 
+  width: 960px; 
+  height: 540px; 
   position: fixed;
   top: 50%; 
   left: 50%; 
-  margin-top: -250px;
-  margin-left: -400px;
+  margin-top: -270px;
+  margin-left: -480px;
   display: none;
   opacity: 0; 
   z-index: 9999;
@@ -228,15 +228,28 @@
 }
 
 .closeButton{
+  position: fixed;
+  top: 15%;
+  right: 13%;
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
-  border: 0;
+  border: 0px;
   outline: none;
+  background-color: rgba(0,0,0,0);
+  color: white;
+  transition: 0.1s all;
 }
 .closeButton:hover{
-  background: black;
+  background-color: rgba(255, 0, 0, 0.6);
+  color: black;
+}
+.trailerNotFound{
   color: white;
+  position: fixed;
+  top: 45%;
+  left: 40%;
+  cursor: default;
 }
 
 

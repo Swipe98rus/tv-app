@@ -44,6 +44,7 @@ async saveTrailerForMovie(result){
 
 
 async setMovieWithAllData(){
+    await this.props.setCurrentPage(1);
     const result = await this.saveMovieList();
 
     //Code save data in state (PICTURES for movie)

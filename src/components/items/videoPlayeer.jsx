@@ -21,14 +21,20 @@ openYoutubePlayeer(){
     setTimeout( ()=>{
         this.customModalWindowRef.current.style.display = 'block';
         this.customModalWindowRef.current.style.opacity = '1';
+        if(this.props.trailer){
+            this.customModalWindowRef.current.childNodes[1].contentWindow
+                .postMessage('{"event":"command", "func":"playVideo", "args":""}', '*');
+        }
     }, 500 )
 }
 closeButton(){
     this.customModalWindowRef.current.style.display = 'none';
     this.customModalWindowRef.current.style.opacity = '0';
     this.overlayRef.current.style.display = 'none';
-    this.customModalWindowRef.current.childNodes[1].contentWindow
+    if(this.props.trailer){
+        this.customModalWindowRef.current.childNodes[1].contentWindow
             .postMessage('{"event":"command", "func":"pauseVideo", "args":""}', '*');
+    }
 }
 
     render(){
@@ -49,13 +55,13 @@ closeButton(){
                 <div className="modal-window-for-trailer"
                     ref={ this.customModalWindowRef }>
                     <button onClick={()=>{this.closeButton()}}  className="closeButton">X</button>
-                    <iframe id="ytplayer" 
+                    { this.props.trailer? <iframe id="ytplayer" 
                             type="text/html" 
-                            width="720" 
-                            height="480"
+                            width="960" 
+                            height="540"
                             src={this.props.trailer}
-                            frameborder="0" 
-                            allowfullscreen/>
+                            frameBorder="0" 
+                            allowFullScreen/> : <h2 className="trailerNotFound">Sorry, trailer not found</h2> }
                 </div>
                 <div className="overlay" ref={this.overlayRef}></div>
             </div>
