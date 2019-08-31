@@ -1,74 +1,39 @@
 import React from 'react';
-import { getPictures } from '../navBar/helpFun/getPictures'
-import { getSimilar } from '../navBar/helpFun/getSimilar'
-import { getTrailer } from '../navBar/helpFun/getTrailer'
-import { getListOfMovies } from '../../APIs/getMovieAPI';
+import {saveMovieList, 
+        savePicturesInState, 
+        saveTrailerForMovie, 
+        saveSimilarMovieInState, 
+        saveRateForMovie } from '../navBar/helpFun';
 
-
-class Similar extends React.Component{
-
-    async savePicturesInState( result ){
-        if( this.props.listPictures ){
-            await this.props.setPicturesMovie( [] );
-        }
-        const pictures = await getPictures( result );
-        await this.props.setPicturesMovie( pictures );
-    }
-    
-    
-    async saveSimilarMovieInState( result ){
-        const similarMovie = await getSimilar( result );
-        await this.props.setListSimilarMovie( similarMovie );
-    }
-    
-    
-    async saveMovieList(){
-        if( this.props.years ){
-            //Code save data in state (List of MOVIE with YEAR)
-            const result = await getListOfMovies( this.props.name, this.props.years );
-            await this.props.setListMovie( result );
-            return result;
-        }else{
-            //Code save data in state (List of MOVIE)
-            const result = await getListOfMovies( this.props.name );
-            await this.props.setListMovie( result );
-            return result;
-        }
-    }
-    async saveTrailerForMovie(result){
-        const trailerMovie = await getTrailer( result );
-        await this.props.setTrailerForMovie( trailerMovie );
-    }
-    
-    
+class Similar extends React.Component{ 
     async setMovieWithAllData(){
+
         await this.props.setCurrentPage(1)
-        const result = await this.saveMovieList();
-    
+        const result = await saveMovieList( this.props.setListMovie, this.props.years, this.props.name );
+
         //Code save data in state (PICTURES for movie)
-        this.savePicturesInState( result );
-            
+        savePicturesInState( result, this.props.listPictures, this.props.setPicturesMovie );
         //Code save data in state (List of SIMILAR movie)
-        this.saveSimilarMovieInState( result );
-        
+        saveSimilarMovieInState( result, this.props.setListSimilarMovie );
         //Code save data in state (List of TRAILER for movie)
-        this.saveTrailerForMovie( result );
+        saveTrailerForMovie( result, this.props.setTrailerForMovie );
+        //Code save data in state (List of TRAILER for movie)
+        saveRateForMovie( result, this.props.setRateMovie );
     }
     
-    
-    //---------------------------------------MAIN function-------------------------------------
     async onReSearchClick(e){
         await this.props.setName(e);        
         await this.setMovieWithAllData();
         } 
            
     render(){
+        const { similar } = this.props
         return(
             <div className="Similar">
                 <h3>Similar movies</h3>
-                { this.props.similar ? 
-                    (this.props.similar[0] ? 
-                        ( this.props.similar.map( film =>( <button key={film.id}
+                { similar ? 
+                    (similar[0] ? 
+                        ( similar.map( film =>( <button key={film.id}
                                                                    type="button"
                                                                    onClick={()=>{this.onReSearchClick(film.title)}}>
                                                     {film.title}

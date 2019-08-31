@@ -7,7 +7,7 @@ import { setListMovie,
          checkInFirstLoad,
          setTrailerForMovie,
          setCurrentPage,
-         setRateMovie      } from '../../redux/listMovies/actions';
+         setRateMovie     } from '../../redux/listMovies/actions';
 import {
     setYears, 
     setName,
@@ -17,24 +17,9 @@ import {
 class NavBarContainer extends React.Component{
 render() {
     return(
-        <NavBar name = { this.props.name }
-                years = { this.props.years }
-                listOfMovie = { this.props.listOfMovie }
-                sort = { this.props.sort }
-                setListMovie = { this.props.setListMovie }
-                setPicturesMovie = { this.props.setPicturesMovie }
-                setListSimilarMovie = { this.props.setListSimilarMovie }
-                setYears = { this.props.setYears } 
-                setName = { this.props.setName }
-                setSort = { this.props.setSort }
-                checkInFirstLoad = { this.props.checkInFirstLoad }
-                listOfPictures = { this.props.listOfPictures }
-                setTrailerForMovie = { this.props.setTrailerForMovie }
-                setCurrentPage = { this.props.setCurrentPage }
-                setRateMovie = { this.props.setRateMovie } />
+        <NavBar toState = { this.props } />
     )
 }}
-
 const mapStateToProps = state =>{
     return {
         name: state.paramsMovies.name,

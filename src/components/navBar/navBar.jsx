@@ -2,75 +2,41 @@ import React from 'react';
 import NavBarName from './name';
 import NavBarYears from './year';
 import NavBarSort from './sort';
-import { getPictures } from './helpFun/getPictures'
-import { getSimilar } from './helpFun/getSimilar'
-import { getTrailer } from './helpFun/getTrailer'
-import { getListOfMovies } from '../../APIs/getMovieAPI';
-import { getRate } from './helpFun/getRate'
+import { saveMovieList, 
+        savePicturesInState, 
+        saveSimilarMovieInState, 
+        saveTrailerForMovie, 
+        saveRateForMovie } from './helpFun'
 
 
 class NavBar extends React.Component{
 //---------------------------------------Additional function-------------------------------------
-async savePicturesInState( result ){
-    if( this.props.listOfPictures ){
-        await this.props.setPicturesMovie( [] );
-    }
-    const pictures = await getPictures( result );
-    await this.props.setPicturesMovie( pictures );
+savePicturesSimilarTrailerRate( result ){
+    //Code save data in state (PICTURES for movie)
+    savePicturesInState( result, this.props.toState.listOfPictures, this.props.toState.setPicturesMovie );
+    //Code save data in state (List of SIMILAR movie)
+    saveSimilarMovieInState( result, this.props.toState.setListSimilarMovie );
+    //Code save data in state (List of TRAILER for movie)
+    saveTrailerForMovie( result, this.props.toState.setTrailerForMovie );
+    //Code save data in state (List of RATE for movie)
+    saveRateForMovie( result, this.props.toState.setRateMovie );
 }
-
-
-async saveSimilarMovieInState( result ){
-    const similarMovie = await getSimilar( result );
-    await this.props.setListSimilarMovie( similarMovie );
-}
-
-
-async saveMovieList(){
-    if( this.props.years ){
-        //Code save data in state (List of MOVIE with YEAR)
-        const result = await getListOfMovies( this.props.name, this.props.years );
-        await this.props.setListMovie( result );
-        return result;
-    }else{
-        //Code save data in state (List of MOVIE)
-        const result = await getListOfMovies( this.props.name );
-        await this.props.setListMovie( result );
-        return result;
-    }
-}
-async saveTrailerForMovie(result){
-    const trailerMovie = await getTrailer( result );
-    await this.props.setTrailerForMovie( trailerMovie );
-}
-
 
 async setMovieWithAllData(){
-    await this.props.setCurrentPage(1);
-    const result = await this.saveMovieList();
-
-    //Code save data in state (PICTURES for movie)
-    this.savePicturesInState( result );
-        
-    //Code save data in state (List of SIMILAR movie)
-    this.saveSimilarMovieInState( result );
-
-    //Code save data in state (List of TRAILER for movie)
-    this.saveTrailerForMovie( result );
-
-    const rateMovie = await getRate(result);
-    await this.props.setRateMovie(rateMovie);
+    await this.props.toState.setCurrentPage(1);
+    const result = await saveMovieList( this.props.toState.setListMovie, this.props.toState.years, this.props.toState.name );
+    //This fun save all data for current movie
+    this.savePicturesSimilarTrailerRate(result);
 }
 
 
 //---------------------------------------MAIN function-------------------------------------
 async onSearchClick(e){
     if( e.which === 13 ){
-        await this.props.setName( e.target.value );        
+        await this.props.toState.setName( e.target.value );        
         await this.setMovieWithAllData();
     }
 }
-
 
 
 async getValueYears(e){
@@ -78,19 +44,16 @@ async getValueYears(e){
 
     if( valueLength > 4 ){
         e.target.style.color = '#e17055';
-
     // eslint-disable-next-line no-cond-assign
     }else if( valueLength < 4 && valueLength >= 1 ){
         e.target.style.color = '#e17055';
-
     // eslint-disable-next-line no-cond-assign
     }else if( valueLength === 4 ){
         e.target.style.color = '#00b894';
-        await this.props.setYears( e.target.value );
-    
+        await this.props.toState.setYears( e.target.value );
     // eslint-disable-next-line no-cond-assign
     }else if( valueLength === 0 ){
-        await this.props.setYears('');
+        await this.props.toState.setYears('');
     }
 }
 
@@ -103,38 +66,29 @@ onSearchClickYears(e){
 
 
 async onChooseInput(e){
-    await this.props.setSort( e.target.value );
-    const listForSort = [ ...this.props.listOfMovie ];
-    const listForReset = [ ...this.props.listOfMovie ];
-    console.log(listForReset);
-    console.log(this.props.listOfMovie)
+    await this.props.toState.setSort( e.target.value );
+    const listForSort = [ ...this.props.toState.listOfMovie ];
+    // const listForReset = [ ...this.props.toState.listOfMovie ];
     const sortMethod = (a, b)=>{
         //Return by oldest
         return( a.movie.year - b.movie.year)
     }
     await listForSort.sort( sortMethod );
 
-    if(this.props.sort === 'By newest'){
+    if(this.props.toState.sort === 'By newest'){
+
         await listForSort.reverse();
-        await this.props.setListMovie( listForSort );
+        await this.props.toState.setListMovie( listForSort );
+        //This fun save all data for current movie
+        this.savePicturesSimilarTrailerRate( listForSort );
 
-        //Code save data in state (PICTURES for movie)
-        this.savePicturesInState( listForSort );
+    }else if(this.props.toState.sort === 'By oldest'){
 
-        //Code save data in state (List of SIMILAR movie)
-        this.saveSimilarMovieInState( listForSort );
-
-    }else if(this.props.sort === 'By oldest'){
-        await this.props.setListMovie( listForSort );
-
-        //Code save data in state (PICTURES for movie)
-        this.savePicturesInState( listForSort );
-
-        //Code save data in state (List of SIMILAR movie)
-        this.saveSimilarMovieInState( listForSort );
+        await this.props.toState.setListMovie( listForSort );
+        //This fun save all data for current movie
+        this.savePicturesSimilarTrailerRate( listForSort );
     }
 }
-
 
 render() {
     return(

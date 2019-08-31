@@ -2,21 +2,17 @@
 import React from 'react';
 import { conditionImg } from './helpFun/conditionImg';
 import Similar from './similar';
-import VideoPlayeer from './videoPlayeer'
+import VideoPlayeer from './videoPlayeer';
+import MovieInfo from './movieInfo'
 
 class Movie extends React.Component{
-
 render(){
     const title = this.props.film.movie.title;
-    const year = this.props.film.movie.year;
-    const similar = this.props.similar;
-    const trailer = this.props.trailer;
     const [ conditionUrl, conditionClassName ] = conditionImg(this.props.url);
-    const movieInfo = this.props.rate;
     return(
         <div className="OneOfMovie">
             
-            <VideoPlayeer trailer = { trailer }
+            <VideoPlayeer trailer = { this.props.trailer }
                           conditionClassName = { conditionClassName }
                           conditionUrl = { conditionUrl } />
 
@@ -24,31 +20,19 @@ render(){
                 <h2>{title}</h2>
             </div>
 
-            <div className="movieYear">
-                <h4>{year}</h4>
-                <h4>{movieInfo? movieInfo.Country : 'Searching..'}</h4>
-                <p>IMDB:  {movieInfo? movieInfo.imdbRating : 'Searching..'}</p>
-                <p>
-                    {movieInfo? movieInfo.Ratings[1]? 
-                        (movieInfo.Ratings[1].Source + ':  ' + movieInfo.Ratings[1].Value ) : 'Not Found' 
-                                : 'Searching..'}
-                </p>
-                <p>
-                    {movieInfo? movieInfo.Ratings[2]? 
-                            (movieInfo.Ratings[2].Source + ':  ' + movieInfo.Ratings[2].Value ) : 'Not Found' 
-                                    : 'Searching..'}
-                </p>
-            </div>
+            <MovieInfo  year = { this.props.film.movie.year }
+                        movieInfo = { this.props.rate }   />
 
-            <Similar similar={similar}
-                     setListMovie={this.props.setListMovie}
+            <Similar similar={ this.props.similar }
+                     setListMovie={ this.props.setListMovie }
                      setName = { this.props.setName } 
                      setPicturesMovie = { this.props.setPicturesMovie } 
                      setListSimilarMovie = { this.props.setListSimilarMovie }
                      name = { this.props.name }
                      listPictures = { this.props.url }
                      setTrailerForMovie = { this.props.setTrailerForMovie }
-                     setCurrentPage = { this.props.setCurrentPage } />
+                     setCurrentPage = { this.props.setCurrentPage }
+                     setRateMovie = { this.props.setRateMovie } />
 
         </div>
     )

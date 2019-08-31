@@ -145,17 +145,17 @@
   justify-content: center;
   padding: 15px;
 }
-.movieYear{
+.movieInfo{
   display: grid;
   justify-content: center;
   text-align: center;
   font-size: 16px;
 }
-.movieYear>h4:nth-child(2){
+.movieInfo>h4:nth-child(2){
   margin-top: 6px;
   margin-bottom: 20px;
 }
-.movieYear>h4:nth-child(2)::after{
+.movieInfo>h4:nth-child(2)::after{
   display: block;
   content: '';
   border-radius: 50%;
@@ -165,7 +165,7 @@
   justify-self: center;
   margin-top: 10px;
 }
-.movieYear>p{
+.movieInfo>p{
   margin-bottom: 4px;
   margin-top: 4px;
 }
