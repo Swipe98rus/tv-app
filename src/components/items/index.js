@@ -32,7 +32,8 @@ const paginate = (pageNumber)=>{
                         name = { this.props.name }
                         trailers = { this.props.trailers }
                         setTrailerForMovie = { this.props.setTrailerForMovie }
-                        setCurrentPage = { this.props.setCurrentPage }  />
+                        setCurrentPage = { this.props.setCurrentPage }
+                        rate = { this.props.rate }  />
 
             <Pagination moviePerPage = { this.props.moviePerPage }
                         totalMovie = { this.props.listOfMovie.length }
@@ -50,6 +51,7 @@ const mapStateToProps = state =>{
         moviePerPage: state.listMovies.moviePerPage,
         name: state.paramsMovies.name,
         trailers: state.listMovies.trailers,
+        rate: state.listMovies.rate,
     };
 };
 const mapDispatchToProps = {

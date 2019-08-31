@@ -4,7 +4,8 @@ import {
     PUT_SIMILAR_MOVIE,
     CHANGE_CURRENT_PAGE,
     CHANGE_FIRST_LOAD_APP,
-    PUT_LIFT_OF_TRAILER_FOR_MOVIE
+    PUT_LIFT_OF_TRAILER_FOR_MOVIE,
+    PUT_RATE_OF_MOVIE,
                             } from './actions'
 
 const defaultState = {
@@ -12,6 +13,7 @@ const defaultState = {
     listOfPictures: [],
     listOfSimilarMovie: [],
     trailers: [],
+    rate: [],
     firstLoad: true,
     currentPage: 1,
     moviePerPage: 5,
@@ -54,6 +56,12 @@ export const putMoviesReducers = (state = defaultState, action)=>{
             return {
             ...state,
             trailers: action.payload,
+            }
+            // eslint-disable-next-line no-duplicate-case
+        case PUT_RATE_OF_MOVIE:
+            return {
+            ...state,
+            rate: action.payload,
             }
     }
     return state;

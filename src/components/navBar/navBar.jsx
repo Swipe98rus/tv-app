@@ -6,6 +6,8 @@ import { getPictures } from './helpFun/getPictures'
 import { getSimilar } from './helpFun/getSimilar'
 import { getTrailer } from './helpFun/getTrailer'
 import { getListOfMovies } from '../../APIs/getMovieAPI';
+import { getRate } from './helpFun/getRate'
+
 
 class NavBar extends React.Component{
 //---------------------------------------Additional function-------------------------------------
@@ -55,6 +57,9 @@ async setMovieWithAllData(){
 
     //Code save data in state (List of TRAILER for movie)
     this.saveTrailerForMovie( result );
+
+    const rateMovie = await getRate(result);
+    await this.props.setRateMovie(rateMovie);
 }
 
 
@@ -64,11 +69,6 @@ async onSearchClick(e){
         await this.props.setName( e.target.value );        
         await this.setMovieWithAllData();
     }
-}
-async firstLoadingApp (){
-    await this.props.setName('');        
-    await this.setMovieWithAllData();
-    await this.props.checkInFirstLoad(false);
 }
 
 

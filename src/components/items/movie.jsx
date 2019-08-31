@@ -12,6 +12,7 @@ render(){
     const similar = this.props.similar;
     const trailer = this.props.trailer;
     const [ conditionUrl, conditionClassName ] = conditionImg(this.props.url);
+    const movieInfo = this.props.rate;
     return(
         <div className="OneOfMovie">
             
@@ -24,7 +25,19 @@ render(){
             </div>
 
             <div className="movieYear">
-                <p>{year}</p>
+                <h4>{year}</h4>
+                <h4>{movieInfo? movieInfo.Country : 'Searching..'}</h4>
+                <p>IMDB:  {movieInfo? movieInfo.imdbRating : 'Searching..'}</p>
+                <p>
+                    {movieInfo? movieInfo.Ratings[1]? 
+                        (movieInfo.Ratings[1].Source + ':  ' + movieInfo.Ratings[1].Value ) : 'Not Found' 
+                                : 'Searching..'}
+                </p>
+                <p>
+                    {movieInfo? movieInfo.Ratings[2]? 
+                            (movieInfo.Ratings[2].Source + ':  ' + movieInfo.Ratings[2].Value ) : 'Not Found' 
+                                    : 'Searching..'}
+                </p>
             </div>
 
             <Similar similar={similar}

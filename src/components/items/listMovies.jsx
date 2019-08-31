@@ -27,6 +27,7 @@ class ListMovies extends React.Component{
                                   trailer = { this.props.trailers[i] }
                                   setTrailerForMovie = { this.props.setTrailerForMovie }
                                   setCurrentPage = { this.props.setCurrentPage }
+                                  rate = { this.props.rate[i] }
                             />
                         })
             }

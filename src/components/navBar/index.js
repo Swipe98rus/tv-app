@@ -6,7 +6,8 @@ import { setListMovie,
          setListSimilarMovie, 
          checkInFirstLoad,
          setTrailerForMovie,
-         setCurrentPage      } from '../../redux/listMovies/actions';
+         setCurrentPage,
+         setRateMovie      } from '../../redux/listMovies/actions';
 import {
     setYears, 
     setName,
@@ -29,7 +30,8 @@ render() {
                 checkInFirstLoad = { this.props.checkInFirstLoad }
                 listOfPictures = { this.props.listOfPictures }
                 setTrailerForMovie = { this.props.setTrailerForMovie }
-                setCurrentPage = { this.props.setCurrentPage } />
+                setCurrentPage = { this.props.setCurrentPage }
+                setRateMovie = { this.props.setRateMovie } />
     )
 }}
 
@@ -39,7 +41,7 @@ const mapStateToProps = state =>{
         years: state.paramsMovies.years,
         listOfMovie: state.listMovies.listOfMovie,
         sort: state.paramsMovies.sort,
-        listOfPictures: state.listMovies.listOfPictures
+        listOfPictures: state.listMovies.listOfPictures,
     };
 };
 const mapDispatchToProps = {
@@ -51,7 +53,8 @@ const mapDispatchToProps = {
     setSort,
     checkInFirstLoad,
     setTrailerForMovie,
-    setCurrentPage
+    setCurrentPage,
+    setRateMovie,
 };
 
 export default connect( mapStateToProps, mapDispatchToProps )(NavBarContainer);
