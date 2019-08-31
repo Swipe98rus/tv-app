@@ -24,6 +24,7 @@ class ListMovies extends React.Component{
                                   setListSimilarMovie = { this.props.setListSimilarMovie }
                                   name = { this.props.name }
                                   listPictures = { this.props.url }
+                                  trailer = { this.props.trailers[i] }
                             />
                         })
             }

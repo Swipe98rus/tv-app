@@ -4,6 +4,7 @@ import NavBarYears from './year';
 import NavBarSort from './sort';
 import { getPictures } from './helpFun/getPictures'
 import { getSimilar } from './helpFun/getSimilar'
+import { getTrailer } from './helpFun/getTrailer'
 import { getListOfMovies } from '../../APIs/getMovieAPI';
 
 class NavBar extends React.Component{
@@ -36,6 +37,10 @@ async saveMovieList(){
         return result;
     }
 }
+async saveTrailerForMovie(result){
+    const trailerMovie = await getTrailer( result );
+    await this.props.setTrailerForMovie( trailerMovie );
+}
 
 
 async setMovieWithAllData(){
@@ -46,6 +51,9 @@ async setMovieWithAllData(){
         
     //Code save data in state (List of SIMILAR movie)
     this.saveSimilarMovieInState( result );
+
+    //Code save data in state (List of TRAILER for movie)
+    this.saveTrailerForMovie( result );
 }
 
 

@@ -4,7 +4,8 @@ import NavBar from './navBar';
 import { setListMovie, 
          setPicturesMovie, 
          setListSimilarMovie, 
-         checkInFirstLoad,      } from '../../redux/listMovies/actions';
+         checkInFirstLoad,
+         setTrailerForMovie      } from '../../redux/listMovies/actions';
 import {
     setYears, 
     setName,
@@ -25,7 +26,8 @@ render() {
                 setName = { this.props.setName }
                 setSort = { this.props.setSort }
                 checkInFirstLoad = { this.props.checkInFirstLoad }
-                listOfPictures = { this.props.listOfPictures } />
+                listOfPictures = { this.props.listOfPictures }
+                setTrailerForMovie = { this.props.setTrailerForMovie } />
     )
 }}
 
@@ -46,6 +48,7 @@ const mapDispatchToProps = {
     setName,
     setSort,
     checkInFirstLoad,
+    setTrailerForMovie
 };
 
 export default connect( mapStateToProps, mapDispatchToProps )(NavBarContainer);

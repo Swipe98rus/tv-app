@@ -3,6 +3,7 @@ export const PUT_PICTURES_FOR_MOVIE = 'PUT_PICTURES_FOR_MOVIE';
 export const PUT_SIMILAR_MOVIE = 'PUT_SIMILAR_MOVIE';
 export const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE';
 export const CHANGE_FIRST_LOAD_APP = 'CHANGE_FIRST_LOAD_APP';
+export const PUT_LIFT_OF_TRAILER_FOR_MOVIE = 'PUT_LIFT_OF_TRAILER_FOR_MOVIE';
 
 
 
@@ -25,4 +26,8 @@ export const setCurrentPage = (page)=>({
 export const checkInFirstLoad = (boolean)=>({
     type: CHANGE_FIRST_LOAD_APP,
     payload: boolean,
+})
+export const setTrailerForMovie = (trailers)=>({
+    type: PUT_LIFT_OF_TRAILER_FOR_MOVIE,
+    payload: trailers,
 })
