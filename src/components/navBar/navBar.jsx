@@ -25,6 +25,7 @@ savePicturesSimilarTrailerRate( result ){
 async setMovieWithAllData(){
     await this.props.toState.setCurrentPage(1);
     const result = await saveMovieList( this.props.toState.setListMovie, this.props.toState.years, this.props.toState.name );
+    await this.props.toState.setListMovieCopyForReset(result);
     //This fun save all data for current movie
     this.savePicturesSimilarTrailerRate(result);
 }
@@ -68,22 +69,26 @@ onSearchClickYears(e){
 async onChooseInput(e){
     await this.props.toState.setSort( e.target.value );
     const listForSort = [ ...this.props.toState.listOfMovie ];
-    // const listForReset = [ ...this.props.toState.listOfMovie ];
     const sortMethod = (a, b)=>{
         //Return by oldest
         return( a.movie.year - b.movie.year)
     }
     await listForSort.sort( sortMethod );
 
-    if(this.props.toState.sort === 'By newest'){
+    if(this.props.toState.sort === 'Not sort'){
 
-        await listForSort.reverse();
-        await this.props.toState.setListMovie( listForSort );
+        await this.props.toState.setListMovie( this.props.toState.listOfMovieCopyForReset );
         //This fun save all data for current movie
-        this.savePicturesSimilarTrailerRate( listForSort );
+        this.savePicturesSimilarTrailerRate( this.props.toState.listOfMovieCopyForReset);
 
     }else if(this.props.toState.sort === 'By oldest'){
 
+        await this.props.toState.setListMovie( listForSort );
+        //This fun save all data for current movie
+        this.savePicturesSimilarTrailerRate( listForSort );
+    }else if(this.props.toState.sort === 'By newest'){
+
+        await listForSort.reverse();
         await this.props.toState.setListMovie( listForSort );
         //This fun save all data for current movie
         this.savePicturesSimilarTrailerRate( listForSort );

@@ -1,5 +1,6 @@
 import { 
     PUT_LIST_OF_FILM_NAME,
+    PUT_LIST_OF_FILM_NAME_COPY,
     PUT_PICTURES_FOR_MOVIE,
     PUT_SIMILAR_MOVIE,
     CHANGE_CURRENT_PAGE,
@@ -10,13 +11,14 @@ import {
 
 const defaultState = {
     listOfMovie: [],
+    listOfMovieCopyForReset: [],
     listOfPictures: [],
     listOfSimilarMovie: [],
     trailers: [],
     rate: [],
     firstLoad: true,
     currentPage: 1,
-    moviePerPage: 5,
+    moviePerPage: 5, 
 }
 
 export const putMoviesReducers = (state = defaultState, action)=>{
@@ -26,6 +28,11 @@ export const putMoviesReducers = (state = defaultState, action)=>{
             return {
                 ...state,
                 listOfMovie: action.payload,
+            }
+        case PUT_LIST_OF_FILM_NAME_COPY:
+            return {
+                ...state,
+                listOfMovieCopyForReset: action.payload,
             }
         // eslint-disable-next-line no-duplicate-case
         case PUT_PICTURES_FOR_MOVIE:

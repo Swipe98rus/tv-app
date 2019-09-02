@@ -9,37 +9,58 @@ import { setCurrentPage,
          setRateMovie } from '../../redux/listMovies/actions';
 import { setName } from '../../redux/paramsMovies/actions'
 import ListMovies from './listMovies';
+import error from '../../img/error.svg'
 
 class  MovieContainer extends React.Component{
 render() {
+
+const { name, listOfMovie } = this.props;
+
 //GET CURRENT MOVIES
 const indexOfLastMovie = this.props.currentPage * this.props.moviePerPage;
 const indexOfFirstMovie = indexOfLastMovie - this.props.moviePerPage;
-const currentMovies = this.props.listOfMovie.slice(indexOfFirstMovie, indexOfLastMovie);
+const currentMovies = listOfMovie.slice(indexOfFirstMovie, indexOfLastMovie);
 const paginate = (pageNumber)=>{
     this.props.setCurrentPage(pageNumber);
 } 
 
+
+const conditionRenderByResult = ()=>{
+    if( (name !== '' && listOfMovie.length === 0) ){
+            return (
+                <div className="noResultBySearch">
+                    <h1>{name} - Not found</h1>
+                    <h3>¯\_(ツ)_/¯</h3>
+                    <img src={error} alt='not found'/>
+                </div>
+            )
+    }else{
+        return (
+            <div>
+                <ListMovies currentMovies = { currentMovies }
+                            url = { this.props.listOfPictures }
+                            similar = { this.props.listOfSimilarMovie }
+                            indexOfFirstMovie = { indexOfFirstMovie } 
+                            setPicturesMovie = { this.props.setPicturesMovie }
+                            setListMovie = { this.props.setListMovie }
+                            setName = { this.props.setName }
+                            setListSimilarMovie = { this.props.setListSimilarMovie }
+                            name = { name }
+                            trailers = { this.props.trailers }
+                            setTrailerForMovie = { this.props.setTrailerForMovie }
+                            setCurrentPage = { this.props.setCurrentPage }
+                            rate = { this.props.rate }
+                            setRateMovie = { this.props.setRateMovie }  />
+                <Pagination moviePerPage = { this.props.moviePerPage }
+                            totalMovie = { this.props.listOfMovie.length }
+                            paginate = { paginate }    />
+            </div>
+        )
+    }
+}
     return(
         <div>
-            <ListMovies currentMovies = { currentMovies }
-                        url = { this.props.listOfPictures }
-                        similar = { this.props.listOfSimilarMovie }
-                        indexOfFirstMovie = { indexOfFirstMovie } 
-                        setPicturesMovie = { this.props.setPicturesMovie }
-                        setListMovie = { this.props.setListMovie }
-                        setName = { this.props.setName }
-                        setListSimilarMovie = { this.props.setListSimilarMovie }
-                        name = { this.props.name }
-                        trailers = { this.props.trailers }
-                        setTrailerForMovie = { this.props.setTrailerForMovie }
-                        setCurrentPage = { this.props.setCurrentPage }
-                        rate = { this.props.rate }
-                        setRateMovie = { this.props.setRateMovie }  />
-
-            <Pagination moviePerPage = { this.props.moviePerPage }
-                        totalMovie = { this.props.listOfMovie.length }
-                        paginate = { paginate }    />
+            { conditionRenderByResult() }
         </div>
     )
 }}

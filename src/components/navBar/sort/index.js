@@ -5,13 +5,12 @@ class NavBarSort extends React.Component{
         return(
             <div className="wrapSort">
                 <label htmlFor="sort">optional</label>
-                <input list="sortMethod"
-                        placeholder="Sort"
-                        onInput={this.props.onChooseInput}/>
-                <datalist id="sortMethod">
-                    <option>By newest</option>
-                    <option>By oldest</option>
-                </datalist>
+                <select name="sort"
+                        onChange={this.props.onChooseInput} >
+                    <option value="Not sort">Not sort</option>
+                    <option value="By newest">By newest</option>
+                    <option value="By oldest">By oldest</option>
+                </select>
             </div>
         )
     }

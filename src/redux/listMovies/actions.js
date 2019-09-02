@@ -1,4 +1,5 @@
 export const PUT_LIST_OF_FILM_NAME = 'PUT_LIST_OF_FILM_NAME';
+export const PUT_LIST_OF_FILM_NAME_COPY = 'PUT_LIST_OF_FILM_NAME_COPY';
 export const PUT_PICTURES_FOR_MOVIE = 'PUT_PICTURES_FOR_MOVIE';
 export const PUT_SIMILAR_MOVIE = 'PUT_SIMILAR_MOVIE';
 export const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE';
@@ -11,6 +12,10 @@ export const PUT_RATE_OF_MOVIE = 'PUT_RATE_OF_MOVIE';
 export const setListMovie = (listMovie)=>({
     type: PUT_LIST_OF_FILM_NAME,
     payload: listMovie,
+})
+export const setListMovieCopyForReset = (listMovieCopy)=>({
+    type: PUT_LIST_OF_FILM_NAME_COPY,
+    payload: listMovieCopy,
 })
 export const setPicturesMovie = (pict)=>({
     type: PUT_PICTURES_FOR_MOVIE,
