@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../../img/logoMSND.svg'
 
 class Pagination extends React.Component{
 render(){
@@ -10,15 +11,19 @@ render(){
     return (
         <div>
             <div className="pagination">
-                {pageNumbers.map( pageNumb => (
-                    <a href="#navBarSetting" 
-                       className="pageLink" 
-                       key={pageNumb}
-                       onClick={(e)=>{ e.preventDefault();
-                                       this.props.paginate(pageNumb)  }}>
-                        {pageNumb}
-                    </a>
-                ))}
+                <div className="personalSign"><p>Created by Victor Ryabkov</p></div>
+                <div className="listOfPage">
+                    {pageNumbers.map( pageNumb => (
+                        <a href="#navBarSetting" 
+                        className="pageLink" 
+                        key={pageNumb}
+                        onClick={(e)=>{ e.preventDefault();
+                                        this.props.paginate(pageNumb)  }}>
+                            {pageNumb}
+                        </a>
+                    ))}
+                </div>
+                <div className="wrap-logo"><img src={logo} alt="Logo"/></div>
             </div>
         </div>
     )

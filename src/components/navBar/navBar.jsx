@@ -11,6 +11,10 @@ import { saveMovieList,
 
 
 class NavBar extends React.Component{
+    constructor(props){
+        super(props)
+        this.movieTitleRef = React.createRef();
+    }
 //---------------------------------------Additional function-------------------------------------
 savePicturesSimilarTrailerRate( result ){
     //Code save data in state (PICTURES for movie)
@@ -48,11 +52,11 @@ onSearchClickYears(e){
 }
 
 
-// onSearchAuthor(e){
-//     if(e.which === 13){
-
-//     }
-// }
+async onSearchButton(e){
+    const titleValue = this.movieTitleRef.current.value;
+    await this.props.toState.setName(titleValue); 
+    await this.setMovieWithAllData();
+}
 
 
 async getValueYears(e){
@@ -106,11 +110,14 @@ async onChooseInput(e){
 render() {
     return(
         <div className='setting' id="navBarSetting">
-                <NavBarName onSearchClick={ (e)=>{ this.onSearchClick(e) }}/>
+                <NavBarName onSearchClick={ (e)=>{ this.onSearchClick(e) }}
+                            movieTitleRef={this.movieTitleRef}/>
                 {/* <NavBarAuthor onSearchClick ={ (e)=>{this.onSearchAuthor(e)} }/>  */}
                 <NavBarYears getValueYears={ (e)=>{ this.getValueYears(e) }}
                              onSearchClickYears={ (e)=>{ this.onSearchClickYears(e) }}/>
                 <NavBarSort onChooseInput={ (e)=>{ this.onChooseInput(e) }}/>
+                <button className="search_button"
+                        onClick={(e)=>{this.onSearchButton(e)}}>Search</button>
         </div>
     )
 }}

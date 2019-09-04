@@ -193,10 +193,9 @@
 
 .pagination{
   width: 100%;
-  height: 65px;
+  height: 100px;
   background-color: black;
   display: grid;
-  justify-content: center;
   align-items: center;
   grid-auto-flow: column;
 }
@@ -209,6 +208,7 @@
 .pageLink{
   color: white;
   text-decoration: none;
+  justify-self: center;
   padding: 5px 10px;
   border: 1px solid white;
 }
@@ -216,9 +216,33 @@
   background-color: rgba(192,192,192, 0.45);
   transition: 0.12s;
 }
+.listOfPage{
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-items: center;
+}
 .pageLink:active{
   background-color: silver;
   color: black;
+}
+.personalSign{
+  color: silver;
+  display: grid;
+  align-items: center;
+}
+.personalSign>p{
+  margin-left: 15px;
+  font-size: 14px;
+}
+.wrap-logo{
+  display: grid;
+  justify-content: flex-end;
+  align-items: center;
+}
+.wrap-logo>img{
+  height: 75px;
+  padding-right: 15px;
 }
 
 
@@ -274,6 +298,22 @@
   left: 40%;
   cursor: default;
 }
+.search_button{
+  padding: 3px 15px;
+  border: 1px solid white;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+  background: white;
+}
+.search_button:hover{
+  transition: 0.15s all;
+  background: rgba(255, 255, 255, 0.8);
+}
+.search_button:active{
+  transition: 0.1s all;
+  color: greenyellow;
+}
 
 .noResultBySearch{
   display: grid;
@@ -293,7 +333,7 @@
 @media (max-width: 500px){
 
   .setting{
-    height: 200px;
+    height: 260px;
     grid-auto-flow: row;
   }
   .OneOfMovie{
@@ -336,6 +376,7 @@
   }
   .movieTitle{
     grid-row: 2/3;
+    text-align: center;
   }
   .movieTitle>h2{
     font-size: 32px;
@@ -380,5 +421,8 @@
   #ytplayer{
     width: 350px;
     height: 350px;
+  }
+  .personalSign>p{
+    font-size: 10px;
   }
 }

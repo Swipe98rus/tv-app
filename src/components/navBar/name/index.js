@@ -7,6 +7,7 @@ class NavBarName extends React.Component{
                     name="searchFilm" 
                     onKeyPress={this.props.onSearchClick}
                     placeholder="Movie title"
+                    ref={this.props.movieTitleRef}
                 />
         )
     }
