@@ -2,6 +2,7 @@ import React from 'react';
 import NavBarName from './name';
 import NavBarYears from './year';
 import NavBarSort from './sort';
+// import NavBarAuthor from './author'
 import { saveMovieList, 
         savePicturesInState, 
         saveSimilarMovieInState, 
@@ -40,6 +41,20 @@ async onSearchClick(e){
 }
 
 
+onSearchClickYears(e){
+    if(e.which === 13){
+        this.setMovieWithAllData();
+    }
+}
+
+
+// onSearchAuthor(e){
+//     if(e.which === 13){
+
+//     }
+// }
+
+
 async getValueYears(e){
     let valueLength = parseInt( e.target.value.length );
 
@@ -55,13 +70,6 @@ async getValueYears(e){
     // eslint-disable-next-line no-cond-assign
     }else if( valueLength === 0 ){
         await this.props.toState.setYears('');
-    }
-}
-
-
-onSearchClickYears(e){
-    if(e.which === 13){
-        this.setMovieWithAllData();
     }
 }
 
@@ -99,6 +107,7 @@ render() {
     return(
         <div className='setting' id="navBarSetting">
                 <NavBarName onSearchClick={ (e)=>{ this.onSearchClick(e) }}/>
+                {/* <NavBarAuthor onSearchClick ={ (e)=>{this.onSearchAuthor(e)} }/>  */}
                 <NavBarYears getValueYears={ (e)=>{ this.getValueYears(e) }}
                              onSearchClickYears={ (e)=>{ this.onSearchClickYears(e) }}/>
                 <NavBarSort onChooseInput={ (e)=>{ this.onChooseInput(e) }}/>

@@ -56,6 +56,7 @@
   display: grid;
   align-items: center;
   height: 295px;
+  width: 200px;
   position: relative;
 }
 
@@ -183,7 +184,7 @@
   font-size: 14px;
 }
 .Similar>button:hover{
-  transition: 0.3s all;
+  /* transition: 0.3s all; */
   border: 1px solid black;
   border-radius: 6px;
   background-color: rgba(255, 255, 255, 0.4);
@@ -283,5 +284,101 @@
   margin: 50px;
 }
 .noResultBySearch>img{
-  height: 400px;
+  height: 350px;
+}
+
+
+
+
+@media (max-width: 500px){
+
+  .setting{
+    height: 200px;
+    grid-auto-flow: row;
+  }
+  .OneOfMovie{
+    height: 855px;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-rows: 2fr 0.5fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    padding-top: 10px; 
+  }
+  .OneOfMovie::after{
+    width: 95%;
+    margin-bottom: 10px;
+  }
+  .OneOfMovie:last-child::after{
+    display: none;
+  }
+  .moviePoster{
+    height: 390px;
+    width: 251px;
+    margin: auto;
+  }
+  .moviePosterImg{
+    height: 375px;
+    width: 251px;
+  }
+  .moviePosterError{
+    width: 60%;
+    justify-self: center;
+    margin: 0;
+  }
+  .play-button{
+    width: 250px;
+  }
+  .preloader{
+    top: 7px;
+    width: 250px;
+    height: 375px;
+  }
+  .movieTitle{
+    grid-row: 2/3;
+  }
+  .movieTitle>h2{
+    font-size: 32px;
+  }
+  .movieInfo{
+    grid-row: 3/4;
+  }
+  .Similar{
+    grid-row: 4/5;
+    text-align: center;
+  }
+  .Similar>h3{
+    font-size: 22px;
+  }
+  .Similar>button{
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+  .Similar>button:active{
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: inset -1.2px -1.2px 1px rgba(0,0,0,0.6);
+  };
+
+
+  .noResultBySearch{
+    height: 60vh;
+  }
+  .noResultBySearch>img{
+    height: 300px;
+  }
+  .modal-window-for-trailer{
+    width: 400px;
+    height: 700px;
+    margin-top: -175px;
+    margin-left: -175px;
+  }
+  #ytplayer{
+    width: 350px;
+    height: 350px;
+  }
 }

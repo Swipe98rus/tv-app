@@ -35,6 +35,7 @@ class Similar extends React.Component{
                     (similar[0] ? 
                         ( similar.map( film =>( <button key={film.id}
                                                                    type="button"
+                                                                   href={"#navBarSetting"}
                                                                    onClick={()=>{this.onReSearchClick(film.title)}}>
                                                     {film.title}
                                                 </button> ))) : 'Not found') : 'Searching..' }

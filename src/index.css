@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Bitter&display=swap');
 body {
+  width: 100%;
+  overflow-x: hidden;
   margin: 0;
   font-family: 'Bitter', serif;
   -webkit-font-smoothing: antialiased;
