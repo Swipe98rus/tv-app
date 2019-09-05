@@ -1,16 +1,26 @@
 import axios from 'axios';
 
 
-export async function getListOfMovies(name, year){
+export async function getListOfMovies(name, year, genres){
     let params = {};
     if(year){
         params = {
             query: `${name}`,
-            years: `${year}`
+            years: `${year}`,
+            genres: `${genres}`,
+            limit: 50,
+        }
+    }else if(genres){
+        params = {
+            query: `${name}`,
+            years: `${year}`,
+            genres: `${genres}`,
+            limit: 100,
         }
     }else{
         params = {
             query: `${name}`,
+            limit: 50,
         }
     }
 

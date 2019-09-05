@@ -13,6 +13,8 @@ import {
     setYears, 
     setName,
     setSort,
+    setGenres,
+    setCurrentGenres
 } from '../../redux/paramsMovies/actions';
 
 class NavBarContainer extends React.Component{
@@ -29,6 +31,8 @@ const mapStateToProps = state =>{
         listOfMovieCopyForReset: state.listMovies.listOfMovieCopyForReset,
         sort: state.paramsMovies.sort,
         listOfPictures: state.listMovies.listOfPictures,
+        genres: state.paramsMovies.genres,
+        currentGenre: state.paramsMovies.currentGenre
     };
 };
 const mapDispatchToProps = {
@@ -42,7 +46,9 @@ const mapDispatchToProps = {
     setTrailerForMovie,
     setCurrentPage,
     setRateMovie,
-    setListMovieCopyForReset
+    setListMovieCopyForReset,
+    setGenres,
+    setCurrentGenres
 };
 
 export default connect( mapStateToProps, mapDispatchToProps )(NavBarContainer);

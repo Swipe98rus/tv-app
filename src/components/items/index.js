@@ -9,7 +9,8 @@ import { setCurrentPage,
          setRateMovie } from '../../redux/listMovies/actions';
 import { setName } from '../../redux/paramsMovies/actions'
 import ListMovies from './listMovies';
-import error from '../../img/error.svg'
+import error from '../../img/error.svg';
+import logo from '../../img/logoMSND.svg'
 
 class  MovieContainer extends React.Component{
 render() {
@@ -36,21 +37,23 @@ const conditionRenderByResult = ()=>{
             )
     }else{
         return (
-            <div>
-                <ListMovies currentMovies = { currentMovies }
-                            url = { this.props.listOfPictures }
-                            similar = { this.props.listOfSimilarMovie }
-                            indexOfFirstMovie = { indexOfFirstMovie } 
-                            setPicturesMovie = { this.props.setPicturesMovie }
-                            setListMovie = { this.props.setListMovie }
-                            setName = { this.props.setName }
-                            setListSimilarMovie = { this.props.setListSimilarMovie }
-                            name = { name }
-                            trailers = { this.props.trailers }
-                            setTrailerForMovie = { this.props.setTrailerForMovie }
-                            setCurrentPage = { this.props.setCurrentPage }
-                            rate = { this.props.rate }
-                            setRateMovie = { this.props.setRateMovie }  />
+            <div className="wrap-for-content">
+                {this.props.listOfMovie.length < 1 ? 
+                    <div className="wrap-logo"><img src={logo} alt="LOGO" /></div> 
+                        : <ListMovies currentMovies = { currentMovies }
+                                    url = { this.props.listOfPictures }
+                                    similar = { this.props.listOfSimilarMovie }
+                                    indexOfFirstMovie = { indexOfFirstMovie } 
+                                    setPicturesMovie = { this.props.setPicturesMovie }
+                                    setListMovie = { this.props.setListMovie }
+                                    setName = { this.props.setName }
+                                    setListSimilarMovie = { this.props.setListSimilarMovie }
+                                    name = { name }
+                                    trailers = { this.props.trailers }
+                                    setTrailerForMovie = { this.props.setTrailerForMovie }
+                                    setCurrentPage = { this.props.setCurrentPage }
+                                    rate = { this.props.rate }
+                                    setRateMovie = { this.props.setRateMovie }  />}
                 <Pagination moviePerPage = { this.props.moviePerPage }
                             totalMovie = { this.props.listOfMovie.length }
                             paginate = { paginate }    />

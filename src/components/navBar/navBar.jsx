@@ -2,12 +2,15 @@ import React from 'react';
 import NavBarName from './name';
 import NavBarYears from './year';
 import NavBarSort from './sort';
+import NavBarGenres from './genres'
 // import NavBarAuthor from './author'
 import { saveMovieList, 
         savePicturesInState, 
         saveSimilarMovieInState, 
         saveTrailerForMovie, 
-        saveRateForMovie } from './helpFun'
+        saveRateForMovie,
+        getGenresMovie,
+                       } from './helpFun'
 
 
 class NavBar extends React.Component{
@@ -16,6 +19,14 @@ class NavBar extends React.Component{
         this.movieTitleRef = React.createRef();
     }
 //---------------------------------------Additional function-------------------------------------
+async saveAllGenres(){
+        if(this.props.toState.genres.length < 1){
+            const genres = await getGenresMovie();
+            await this.props.toState.setGenres(genres);
+        }
+}
+
+
 savePicturesSimilarTrailerRate( result ){
     //Code save data in state (PICTURES for movie)
     savePicturesInState( result, this.props.toState.listOfPictures, this.props.toState.setPicturesMovie );
@@ -29,7 +40,10 @@ savePicturesSimilarTrailerRate( result ){
 
 async setMovieWithAllData(){
     await this.props.toState.setCurrentPage(1);
-    const result = await saveMovieList( this.props.toState.setListMovie, this.props.toState.years, this.props.toState.name );
+    const result = await saveMovieList( this.props.toState.setListMovie, 
+                                        this.props.toState.years, 
+                                        this.props.toState.name, 
+                                        this.props.toState.currentGenre );
     await this.props.toState.setListMovieCopyForReset(result);
     //This fun save all data for current movie
     this.savePicturesSimilarTrailerRate(result);
@@ -106,8 +120,16 @@ async onChooseInput(e){
         this.savePicturesSimilarTrailerRate( listForSort );
     }
 }
+async onChooseGenre(e){
+    if(e.target.value === 'default'){
+        await this.props.toState.setCurrentGenres('');
+    }else{
+        await this.props.toState.setCurrentGenres(e.target.value)
+    }
+}
 
 render() {
+    this.saveAllGenres();
     return(
         <div className='setting' id="navBarSetting">
                 <NavBarName onSearchClick={ (e)=>{ this.onSearchClick(e) }}
@@ -115,6 +137,8 @@ render() {
                 {/* <NavBarAuthor onSearchClick ={ (e)=>{this.onSearchAuthor(e)} }/>  */}
                 <NavBarYears getValueYears={ (e)=>{ this.getValueYears(e) }}
                              onSearchClickYears={ (e)=>{ this.onSearchClickYears(e) }}/>
+                <NavBarGenres genres={this.props.toState.genres}
+                              onChooseGenre={(e)=>{this.onChooseGenre(e)}}/>
                 <NavBarSort onChooseInput={ (e)=>{ this.onChooseInput(e) }}/>
                 <button className="search_button"
                         onClick={(e)=>{this.onSearchButton(e)}}>Search</button>

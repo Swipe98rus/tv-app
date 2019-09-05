@@ -6,3 +6,4 @@ export * from '../../../APIs/getMovieAPI';
 export * from './saveMovieList';
 export * from './savePicturesInState';
 export * from './saveAdditionalData';
+export * from '../../../APIs/getGenres'

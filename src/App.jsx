@@ -10,6 +10,7 @@ import MovieContainer from './components/items';
 const store = createStore(rootReducer);
 
 
+
 class App extends React.Component{
 render(){
   return (
