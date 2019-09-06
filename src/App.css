@@ -208,16 +208,25 @@
   align-items: center;
   grid-auto-flow: column;
 }
-.extra-pagination :first-child,
-.pagination :first-child{
-  border-radius: 10px 0px 0px 0px;
-}
-.extra-pagination :last-child,
-.pagination :last-child{
+.nextButton{
   border-radius: 0px 0px 10px 0px;
+  padding: 5px 18px !important;
+}
+.prevButton{
+  border-radius: 10px 0px 0px 0px;
+  padding: 5px 18px !important;
 }
 .pageLink{
   color: white;
+  text-decoration: none;
+  justify-self: center;
+  padding: 5px 10px;
+  border: 1px solid white;
+  cursor: default;
+}
+.currentPageActive{
+  color: black;
+  background-color: white !important;
   text-decoration: none;
   justify-self: center;
   padding: 5px 10px;
@@ -461,5 +470,11 @@
   }
   .pageLink{
     padding: 6px 12px;
+  }
+}
+
+@media(min-width: 1600px){
+  .wrap-for-content{
+    min-height: 90vh;
   }
 }

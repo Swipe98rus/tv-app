@@ -18,7 +18,7 @@ const defaultState = {
     rate: [],
     firstLoad: true,
     currentPage: 1,
-    moviePerPage: 5, 
+    moviePerPage: 10, 
 }
 
 export const putMoviesReducers = (state = defaultState, action)=>{

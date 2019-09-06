@@ -10,21 +10,27 @@ import { setCurrentPage,
 import { setName } from '../../redux/paramsMovies/actions'
 import ListMovies from './listMovies';
 import error from '../../img/error.svg';
-import logo from '../../img/logoMSND.svg'
+import logo from '../../img/logoMSND.svg';
+import { saveMovieList,
+        savePicturesInState,
+        startAllSaveFun } from '../navBar/helpFun/index'
 
 class  MovieContainer extends React.Component{
 render() {
 
 const { name, listOfMovie } = this.props;
 
-//GET CURRENT MOVIES
-const indexOfLastMovie = this.props.currentPage * this.props.moviePerPage;
-const indexOfFirstMovie = indexOfLastMovie - this.props.moviePerPage;
-const currentMovies = listOfMovie.slice(indexOfFirstMovie, indexOfLastMovie);
-const paginate = (pageNumber)=>{
+const paginate = async (pageNumber)=>{
     this.props.setCurrentPage(pageNumber);
+    window.scrollTo(0,0);
+    const result = await saveMovieList( this.props.setListMovie, 
+                this.props.years, 
+                this.props.name, 
+                this.props.currentGenre,
+                pageNumber );
+    await savePicturesInState( result, this.props.listOfPictures, this.props.setPicturesMovie );
+    await startAllSaveFun( result, this.props.setListSimilarMovie, this.props.setTrailerForMovie, this.props.setRateMovie );
 } 
-
 
 const conditionRenderByResult = ()=>{
     if( (name !== '' && listOfMovie.length === 0) ){
@@ -40,10 +46,9 @@ const conditionRenderByResult = ()=>{
             <div className="wrap-for-content">
                 {this.props.listOfMovie.length < 1 ? 
                     <div className="wrap-logo"><img src={logo} alt="LOGO" /></div> 
-                        : <ListMovies currentMovies = { currentMovies }
+                        : <ListMovies listOfMovie={ this.props.listOfMovie } 
                                     url = { this.props.listOfPictures }
                                     similar = { this.props.listOfSimilarMovie }
-                                    indexOfFirstMovie = { indexOfFirstMovie } 
                                     setPicturesMovie = { this.props.setPicturesMovie }
                                     setListMovie = { this.props.setListMovie }
                                     setName = { this.props.setName }
@@ -56,7 +61,8 @@ const conditionRenderByResult = ()=>{
                                     setRateMovie = { this.props.setRateMovie }  />}
                 <Pagination moviePerPage = { this.props.moviePerPage }
                             totalMovie = { this.props.listOfMovie.length }
-                            paginate = { paginate }    />
+                            paginate = { paginate }
+                            currentPage = { this.props.currentPage}    />
             </div>
         )
     }
@@ -76,8 +82,10 @@ const mapStateToProps = state =>{
         currentPage: state.listMovies.currentPage,
         moviePerPage: state.listMovies.moviePerPage,
         name: state.paramsMovies.name,
+        years: state.paramsMovies.years,
         trailers: state.listMovies.trailers,
         rate: state.listMovies.rate,
+        currentGenre: state.paramsMovies.currentGenre,
     };
 };
 const mapDispatchToProps = {

@@ -1,6 +1,5 @@
 export * from './getPictures';
 export * from './getSimilar';
-export * from './getTrailer';
 export * from './getRate';
 export * from '../../../APIs/getMovieAPI';
 export * from './saveMovieList';

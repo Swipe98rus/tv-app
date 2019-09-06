@@ -1,29 +1,15 @@
 import axios from 'axios';
 
 
-export async function getListOfMovies(name, year, genres){
-    let params = {};
-    if(year){
-        params = {
+export async function getListOfMovies(name, year, genres, currentPage){
+    let params = {
             query: `${name}`,
-            years: `${year}`,
-            genres: `${genres}`,
-            limit: 50,
-        }
-    }else if(genres){
-        params = {
-            query: `${name}`,
-            years: `${year}`,
-            genres: `${genres}`,
-            limit: 100,
-        }
-    }else{
-        params = {
-            query: `${name}`,
-            limit: 50,
-        }
-    }
-
+            years: year ? `${year}` : '',
+            genres: genres ? `${genres}` : '',
+            limit: 10,
+            page: currentPage,
+            extended: 'full',
+    };
     const result = await axios.get('https://api.trakt.tv/search/movie/',{
     params: params,
     headers:{
@@ -32,6 +18,7 @@ export async function getListOfMovies(name, year, genres){
         "trakt-api-version": 2,
     }
 });
+console.log(result.data)
 return result.data;
 }
 

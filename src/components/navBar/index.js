@@ -32,7 +32,8 @@ const mapStateToProps = state =>{
         sort: state.paramsMovies.sort,
         listOfPictures: state.listMovies.listOfPictures,
         genres: state.paramsMovies.genres,
-        currentGenre: state.paramsMovies.currentGenre
+        currentGenre: state.paramsMovies.currentGenre,
+        currentPage: state.listMovies.currentPage,
     };
 };
 const mapDispatchToProps = {

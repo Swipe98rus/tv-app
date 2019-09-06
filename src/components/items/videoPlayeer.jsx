@@ -22,8 +22,9 @@ openYoutubePlayeer(){
         this.customModalWindowRef.current.style.display = 'block';
         this.customModalWindowRef.current.style.opacity = '1';
         if(this.props.trailer){
-            this.customModalWindowRef.current.childNodes[1].contentWindow
-                .postMessage('{"event":"command", "func":"playVideo", "args":""}', '*');
+            this.customModalWindowRef.current.childNodes[1].src = 'https://www.youtube.com/embed/' + 
+                                                                    this.props.trailer.slice(27, this.props.trailer.length) + 
+                                                                    '?version=3&autoplay=1&enablejsapi=1&start=0&controls=2'
         }
     }, 500 )
 }
@@ -32,8 +33,7 @@ closeButton(){
     this.customModalWindowRef.current.style.opacity = '0';
     this.overlayRef.current.style.display = 'none';
     if(this.props.trailer){
-        this.customModalWindowRef.current.childNodes[1].contentWindow
-            .postMessage('{"event":"command", "func":"pauseVideo", "args":""}', '*');
+        this.customModalWindowRef.current.childNodes[1].src = '';
     }
 }
 
@@ -55,12 +55,14 @@ closeButton(){
                 <div className="modal-window-for-trailer"
                     ref={ this.customModalWindowRef }>
                     <button onClick={()=>{this.closeButton()}}  className="closeButton">X</button>
-                    { this.props.trailer? <iframe id="ytplayer" 
+                    { this.props.trailer ? <iframe id="ytplayer" 
                             type="text/html" 
                             width="960" 
                             height="540"
-                            src={this.props.trailer}
-                            frameBorder="0" 
+                            src={'https://www.youtube.com/embed/' + 
+                                    this.props.trailer.slice(27, this.props.trailer.length) + 
+                                    '?version=3&autoplay=1&enablejsapi=1&start=0&controls=2' }
+                            frameBorder="0"
                             allowFullScreen/> : <h2 className="trailerNotFound">Sorry, trailer not found</h2> }
                 </div>
                 <div className="overlay" ref={this.overlayRef}></div>
@@ -68,6 +70,7 @@ closeButton(){
         )
     }
 }
+
 
 
 

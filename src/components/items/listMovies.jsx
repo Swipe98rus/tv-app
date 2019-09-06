@@ -7,16 +7,15 @@ class ListMovies extends React.Component{
     return(
         <div>
             {
-                this.props.currentMovies.map( (film, index) => {
-                   let i = this.props.indexOfFirstMovie + index;
+                this.props.listOfMovie.map( (film, index) => {
                    let currentSimilar;
-                   if(this.props.similar[i] !== undefined){
-                    currentSimilar = this.props.similar[i];
+                   if(this.props.similar[index] !== undefined){
+                    currentSimilar = this.props.similar[index];
                     currentSimilar.splice( 3, currentSimilar.length );
                    }
                     return <Movie film = { film } 
                                   key = { film.movie.ids.trakt }
-                                  url = { this.props.url[i] }
+                                  url = { this.props.url[index] }
                                   similar = { currentSimilar }
                                   setName = { this.props.setName }
                                   setListMovie = { this.props.setListMovie }
@@ -24,10 +23,10 @@ class ListMovies extends React.Component{
                                   setListSimilarMovie = { this.props.setListSimilarMovie }
                                   name = { this.props.name }
                                   listPictures = { this.props.url }
-                                  trailer = { this.props.trailers[i] }
+                                  trailer = { this.props.trailers[index] }
                                   setTrailerForMovie = { this.props.setTrailerForMovie }
                                   setCurrentPage = { this.props.setCurrentPage }
-                                  rate = { this.props.rate[i] }
+                                  rate = { this.props.rate[index] }
                                   setRateMovie = { this.props.setRateMovie }
                             />
                         })

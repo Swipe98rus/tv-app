@@ -6,9 +6,7 @@ import NavBarGenres from './genres'
 // import NavBarAuthor from './author'
 import { saveMovieList, 
         savePicturesInState, 
-        saveSimilarMovieInState, 
-        saveTrailerForMovie, 
-        saveRateForMovie,
+        startAllSaveFun,
         getGenresMovie,
                        } from './helpFun'
 
@@ -26,16 +24,10 @@ async saveAllGenres(){
         }
 }
 
-
 savePicturesSimilarTrailerRate( result ){
     //Code save data in state (PICTURES for movie)
     savePicturesInState( result, this.props.toState.listOfPictures, this.props.toState.setPicturesMovie );
-    //Code save data in state (List of SIMILAR movie)
-    saveSimilarMovieInState( result, this.props.toState.setListSimilarMovie );
-    //Code save data in state (List of TRAILER for movie)
-    saveTrailerForMovie( result, this.props.toState.setTrailerForMovie );
-    //Code save data in state (List of RATE for movie)
-    saveRateForMovie( result, this.props.toState.setRateMovie );
+    startAllSaveFun( result, this.props.toState.setListSimilarMovie, this.props.toState.setTrailerForMovie, this.props.toState.setRateMovie );
 }
 
 async setMovieWithAllData(){
@@ -43,7 +35,8 @@ async setMovieWithAllData(){
     const result = await saveMovieList( this.props.toState.setListMovie, 
                                         this.props.toState.years, 
                                         this.props.toState.name, 
-                                        this.props.toState.currentGenre );
+                                        this.props.toState.currentGenre,
+                                        this.props.toState.currentPage, );
     await this.props.toState.setListMovieCopyForReset(result);
     //This fun save all data for current movie
     this.savePicturesSimilarTrailerRate(result);
