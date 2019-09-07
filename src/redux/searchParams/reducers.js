@@ -1,20 +1,20 @@
 /* eslint-disable default-case */
 import { 
     SAVE_TITLE_STATE,
-    SAVE_ID_STATE,
     SAVE_YEAR_STATE,
     SAVE_GENRE_STATE,
     SAVE_PAGE_STATE,
-    SAVE_SORT_STATE
+    SAVE_SORT_STATE,
+    SAVE_LOAD_STATUS_STATE
                             } from './actions'
 
 const defaultState = {
     title: '',
-    id:'',
     year:'',
     genre:'',
     page: 1,
-    sort:''
+    sort:'',
+    status: true, //True = load finish, false = load in process
 }
 
 export const updateSearchParamsReducers = (state = defaultState, action)=>{
@@ -23,11 +23,6 @@ export const updateSearchParamsReducers = (state = defaultState, action)=>{
             return {
                 ...state,
                 title: action.payload,
-            }
-        case SAVE_ID_STATE:
-            return {
-                ...state,
-                id: action.payload,
             }
         case SAVE_YEAR_STATE:
             return {
@@ -48,6 +43,11 @@ export const updateSearchParamsReducers = (state = defaultState, action)=>{
             return {
                 ...state,
                 sort: action.payload,
+            }
+        case SAVE_LOAD_STATUS_STATE:
+            return {
+                ...state,
+                status: action.payload,
             }
         
     }

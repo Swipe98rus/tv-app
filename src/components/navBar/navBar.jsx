@@ -13,12 +13,14 @@ class NavBar extends React.Component{
     }
 //---------------------------------------MAIN function-------------------------------------
 async searching(){
+    this.props.state.setLoadStatusAction(false);
     const titleValue = this.movieTitleRef.current.value;
     await this.props.state.setTitleAction(titleValue);
 
     const {title, year, currentGenre, page} = this.props.state;
     const resultConstructor = await getAndBuildAllData( title, year, currentGenre, page );
     this.props.state.setMoviesAction(resultConstructor);
+    this.props.state.setLoadStatusAction(true);
 }
 onEnterClick(e){
     if( e.which === 13 ){

@@ -19,8 +19,6 @@ import {
     setMoviesAction,
     setMoviesCopyAction,
  } from '../../redux/lists/actions';
- //Page Params
- import { setCurrentPageAction } from '../../redux/pageParams/actions'
 
 
 class  MovieContainer extends React.Component{
@@ -35,10 +33,10 @@ const searchingSimilar = async(e)=>{
     await this.props.setTitleAction(e);
     paginate(1);
 } 
-const { title, movies } = this.props;
+const { title, movies, status } = this.props;
 
 const conditionRenderByResult = ()=>{
-    if( (title !== '' && movies.length === 0) ){
+    if( title !== '' && movies.length === 0 && status){
             return (
                 <div className="noResultBySearch">
                     <h1>{title} - Not found</h1>
@@ -51,13 +49,16 @@ const conditionRenderByResult = ()=>{
             <div className="wrap-for-content">
 
                 {this.props.movies.length < 1 ? 
-                    <div className="wrap-logo"><img src={logo} alt="LOGO" /></div> 
-                        : <ListMovies movies={ this.props.movies }
+                    <div className="wrap-logo">
+                        <div className={ status? 'loading' : 'loading loading-active'}></div>
+                        <img src={logo} alt="LOGO" className={ status? 'welcome-logo' : 'welcome-logo welcome-logo-loading'}/>
+                    </div> 
+                        : <ListMovies movies={ movies }
                                       searchingSimilar = {searchingSimilar}   />}
 
                 {this.props.movies.length < 1 ? <div></div> : <Pagination paginate = { paginate }
                                                                         page = { this.props.page}
-                                                                        movies = {this.props.movies}    />}   
+                                                                        movies = { movies }    />}   
                 <div className="personalSign"><p>Created by Victor Ryabkov</p></div>     
             </div>
         )
@@ -76,6 +77,7 @@ return {
         currentGenre: state.searchParams.genre,
         sort: state.searchParams.sort,
         page: state.searchParams.page,
+        status: state.searchParams.status,
     //Lists
         movies: state.lists.movies,
         genres: state.lists.genres,
@@ -94,7 +96,6 @@ const mapDispatchToProps = {
         setMoviesAction,
         setMoviesCopyAction,
     //Page Params
-        setCurrentPageAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer)

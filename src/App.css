@@ -266,11 +266,48 @@
   display: grid;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
-.wrap-logo>img{
+.welcome-logo{
   height: 250px;
 }
-
+.welcome-logo-loading{
+  animation: mini-logo 2s ;
+  height: 150px;
+}
+@keyframes mini-logo{
+  from{
+    height: 250px;
+  }
+  to{
+    height: 150px;
+  }
+}
+.loading{
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  top: 50%;
+  margin-top: -125px;
+  left: 50%;
+  margin-left: -125px;
+}
+.loading-active{
+  border:10px solid white;
+  animation: download 2s  infinite 2s;
+}
+@keyframes download{
+  from{
+    border-radius: 50%;
+    transform: rotate(0deg);
+    border-top: 10px solid black;
+  }
+  to{
+    border-radius: 50%;
+    transform: rotate(360deg);
+    border-top: 10px solid black;
+  }
+}
 
 .scroll{
   display: grid;

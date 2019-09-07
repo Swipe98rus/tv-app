@@ -9,6 +9,7 @@ import {
     setYearAction,
     setGenreAction,
     setSortAction,
+    setLoadStatusAction,
  } from '../../redux/searchParams/actions';
 
  //Lists
@@ -17,8 +18,6 @@ import {
     setGenresListAction,
     setMoviesCopyAction,
  } from '../../redux/lists/actions';
- //Page Params
- import { setCurrentPageAction } from '../../redux/pageParams/actions'
 
 class NavBarContainer extends React.Component{
 async getAndSaveGenresList(){
@@ -57,12 +56,12 @@ const mapDispatchToProps = {
         setYearAction,
         setGenreAction,
         setSortAction,
+        setLoadStatusAction,
     //Lists
         setMoviesAction,
         setGenresListAction,
         setMoviesCopyAction,
     //Page Params
-        setCurrentPageAction,
 };
 
 export default connect( mapStateToProps, mapDispatchToProps )(NavBarContainer);
