@@ -11,7 +11,7 @@ export async function getSimilarMovies(id){
             return result.data.results;
         }
     }catch(e){
-        console.error(e)
+        // console.error(e)
     }
      return result;
 }

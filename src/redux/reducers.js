@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import { putMoviesReducers } from './listMovies/reducers'
-import { putParamsMovies } from './paramsMovies/reducers';
+import { updateSearchParamsReducers } from './searchParams/reducers';
+import { updateListsReducers } from './lists/reducers';
+import { updatePageParamsReducers } from './pageParams/reducers';
 
 export default combineReducers({
-    listMovies: putMoviesReducers,
-    paramsMovies: putParamsMovies,
+    searchParams: updateSearchParamsReducers,
+    lists: updateListsReducers,
+    pageParams: updatePageParamsReducers,
 })
 
 

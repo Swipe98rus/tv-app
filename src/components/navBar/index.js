@@ -1,55 +1,70 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NavBar from './navBar';
-import { setListMovie, 
-         setPicturesMovie, 
-         setListSimilarMovie, 
-         checkInFirstLoad,
-         setTrailerForMovie,
-         setCurrentPage,
-         setRateMovie ,
-         setListMovieCopyForReset    } from '../../redux/listMovies/actions';
-import {
-    setYears, 
-    setName,
-    setSort,
-    setGenres,
-    setCurrentGenres
-} from '../../redux/paramsMovies/actions';
+import { getGenresMovie } from '../../APIs/getGenres';
+
+//Search Params
+import { 
+    setTitleAction,
+    setYearAction,
+    setGenreAction,
+    setSortAction,
+ } from '../../redux/searchParams/actions';
+
+ //Lists
+import { 
+    setMoviesAction,
+    setPicturesAction,
+    setSimilarsAction,
+    setGenresListAction,
+    setMoviesCopyAction,
+ } from '../../redux/lists/actions';
+ //Page Params
+ import { setCurrentPageAction } from '../../redux/pageParams/actions'
 
 class NavBarContainer extends React.Component{
+async getAndSaveGenresList(){
+    if(this.props.genres.length < 1){
+        const genres = await getGenresMovie();
+        this.props.setGenresListAction(genres);
+    }
+}
 render() {
+    this.getAndSaveGenresList();
     return(
-        <NavBar toState = { this.props } />
+        <NavBar state = { this.props } />
     )
 }}
 const mapStateToProps = state =>{
     return {
-        name: state.paramsMovies.name,
-        years: state.paramsMovies.years,
-        listOfMovie: state.listMovies.listOfMovie,
-        listOfMovieCopyForReset: state.listMovies.listOfMovieCopyForReset,
-        sort: state.paramsMovies.sort,
-        listOfPictures: state.listMovies.listOfPictures,
-        genres: state.paramsMovies.genres,
-        currentGenre: state.paramsMovies.currentGenre,
-        currentPage: state.listMovies.currentPage,
+        //Search Params
+            title: state.searchParams.title,
+            year: state.searchParams.year,
+            currentGenre: state.searchParams.genre,
+            sort: state.searchParams.sort,
+        //Lists
+            movies: state.lists.movies,
+            moviesCopy: state.lists.moviesCopy,
+            pictures: state.lists.pictures,
+            genres: state.lists.genres,
+        //Page Params
+            currentPage: state.pageParams.currentPage,
     };
 };
 const mapDispatchToProps = {
-    setListMovie,
-    setPicturesMovie,
-    setListSimilarMovie,
-    setYears,
-    setName,
-    setSort,
-    checkInFirstLoad,
-    setTrailerForMovie,
-    setCurrentPage,
-    setRateMovie,
-    setListMovieCopyForReset,
-    setGenres,
-    setCurrentGenres
+    //Search Params
+        setTitleAction,
+        setYearAction,
+        setGenreAction,
+        setSortAction,
+    //Lists
+        setMoviesAction,
+        setPicturesAction,
+        setSimilarsAction,
+        setGenresListAction,
+        setMoviesCopyAction,
+    //Page Params
+        setCurrentPageAction,
 };
 
 export default connect( mapStateToProps, mapDispatchToProps )(NavBarContainer);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function getRateMovieIMDB(id){
+export async function getDataOMDB(id){
     let result = {};
     try{
         result = await axios.get(`http://www.omdbapi.com/?i=${id}&apikey=257284e6`);
@@ -8,7 +8,7 @@ export async function getRateMovieIMDB(id){
             return result.data;
         }
     }catch(e){
-        console.error(e)
+        // console.error(e)
     }
      return result;
 }

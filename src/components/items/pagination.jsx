@@ -9,44 +9,32 @@ render(){
         'next': this.props.currentPage +1,
         'mid': this.props.currentPage +2,
     }; 
+    const listPages = [pageNumbers.mid -2 , pageNumbers.mid -1, pageNumbers.mid, pageNumbers.mid +1, pageNumbers.mid +2   ]
 
     return (
         <div>
-            {pageNumbers.length > 10 ? <div className="scroll"><p>Scroll please</p></div> : <div></div>}
             <div className='pagination'>
-                <div className='listOfPage'>
+                
+                { this.props.movies.length <1 ? <div></div> : <div className='listOfPage'>
                     <a className="pageLink prevButton"
                        key="prevPage"
                        onClick={(e)=>{ e.preventDefault();
                         this.props.paginate(pageNumbers.prev)}}>Prev</a>
 
-                    <a className={pageNumbers.current === pageNumbers.mid -2 ? 'pageLink currentPageActive' : 'pageLink'}
-                       key="prevCurrentPage2"
-                       onClick={(e)=>{ e.preventDefault();
-                        this.props.paginate(pageNumbers.mid -2)}}>     {pageNumbers.mid -2}   </a>
-                    <a className={pageNumbers.current === pageNumbers.mid -1 ? 'pageLink currentPageActive' : 'pageLink'}
-                       key="prevCurrentPage"
-                       onClick={(e)=>{ e.preventDefault();
-                        this.props.paginate(pageNumbers.mid -1)}}>     {pageNumbers.mid -1}   </a>    
-                    <a className={pageNumbers.current === pageNumbers.mid ? 'pageLink currentPageActive' : 'pageLink'}
-                       key="currentPage"
-                       onClick={(e)=>{ e.preventDefault();
-                        this.props.paginate(pageNumbers.mid)}}>      {pageNumbers.mid}     </a>
-                    <a className={pageNumbers.current === pageNumbers.mid +1 ? 'pageLink currentPageActive' : 'pageLink'}
-                       key="nextCurrentPage"
-                       onClick={(e)=>{ e.preventDefault();
-                        this.props.paginate(pageNumbers.mid +1)}}>     {pageNumbers.mid +1}    </a>
-                    <a className={pageNumbers.current === pageNumbers.mid +2 ? 'pageLink currentPageActive' : 'pageLink'}
-                       key="nextCurrentPage2"
-                       onClick={(e)=>{ e.preventDefault();
-                        this.props.paginate(pageNumbers.mid +2)}}>     {pageNumbers.mid +2}    </a>
-                    
+                    {
+                        listPages.map((page)=>{
+                            return <a className={page === pageNumbers.current ? 'pageLink currentPageActive' : 'pageLink'}
+                                       key={page}
+                                        onClick={(e)=>{ e.preventDefault();
+                             this.props.paginate(page)}}>     {page}   </a>
+                        })
+                    }
                     
                     <a className="pageLink nextButton"
                         key="nextPage" 
                         onClick={(e)=>{ e.preventDefault();
                         this.props.paginate(pageNumbers.next)}}>Next</a>
-                </div>
+                </div> }
                 
             </div>
             <div className="personalSign"><p>Created by Victor Ryabkov</p></div>

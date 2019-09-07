@@ -1,4 +1,4 @@
-import { getSimilarMovies } from '../../../APIs/getSimilarMovieAPI';
+import { getSimilarMovies } from '../../APIs/getSimilarMovieAPI';
 
 export async function getSimilar (result){
     const sim = []

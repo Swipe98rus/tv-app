@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 export async function getGenresMovie(){
 
     const result = await axios.get('https://api.trakt.tv/genres/movies',{

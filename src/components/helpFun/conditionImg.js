@@ -1,4 +1,4 @@
-import error from '../../../img/error.svg'
+import error from '../../img/error.svg'
 
 
 export const conditionImg = (url)=>{

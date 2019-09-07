@@ -1,42 +1,53 @@
 import React from 'react';
 import Pagination from './pagination.jsx'
 import { connect } from 'react-redux';
-import { setCurrentPage,
-         setListMovie,
-         setPicturesMovie,
-         setListSimilarMovie,
-         setTrailerForMovie,
-         setRateMovie } from '../../redux/listMovies/actions';
-import { setName } from '../../redux/paramsMovies/actions'
 import ListMovies from './listMovies';
 import error from '../../img/error.svg';
 import logo from '../../img/logoMSND.svg';
-import { saveMovieList,
-        savePicturesInState,
-        startAllSaveFun } from '../navBar/helpFun/index'
+// import { saveMovieList,
+//         savePicturesInState,
+//         startAllSaveFun } from '../navBar/helpFun/index'
+//Search Params
+import { 
+    setTitleAction,
+    setYearAction,
+    setGenreAction,
+    setSortAction,
+ } from '../../redux/searchParams/actions';
+
+ //Lists
+import { 
+    setMoviesAction,
+    setPicturesAction,
+    setSimilarsAction,
+    setGenresListAction,
+    setMoviesCopyAction,
+ } from '../../redux/lists/actions';
+ //Page Params
+ import { setCurrentPageAction } from '../../redux/pageParams/actions'
+
 
 class  MovieContainer extends React.Component{
 render() {
 
-const { name, listOfMovie } = this.props;
+const { title, movies } = this.props;
 
-const paginate = async (pageNumber)=>{
-    this.props.setCurrentPage(pageNumber);
-    window.scrollTo(0,0);
-    const result = await saveMovieList( this.props.setListMovie, 
-                this.props.years, 
-                this.props.name, 
-                this.props.currentGenre,
-                pageNumber );
-    await savePicturesInState( result, this.props.listOfPictures, this.props.setPicturesMovie );
-    await startAllSaveFun( result, this.props.setListSimilarMovie, this.props.setTrailerForMovie, this.props.setRateMovie );
-} 
+// const paginate = async (pageNumber)=>{
+//     this.props.setCurrentPage(pageNumber);
+//     const result = await saveMovieList( this.props.setListMovie, 
+//                                         this.props.years, 
+//                                         this.props.name, 
+//                                         this.props.currentGenre,
+//                                         pageNumber );
+//     await savePicturesInState( result, this.props.listOfPictures, this.props.setPicturesMovie );
+//     await startAllSaveFun( result, this.props.setListSimilarMovie, this.props.setTrailerForMovie, this.props.setRateMovie );
+// } 
 
 const conditionRenderByResult = ()=>{
-    if( (name !== '' && listOfMovie.length === 0) ){
+    if( (title !== '' && movies.length === 0) ){
             return (
                 <div className="noResultBySearch">
-                    <h1>{name} - Not found</h1>
+                    <h1>{title} - Not found</h1>
                     <h3>¯\_(ツ)_/¯</h3>
                     <img src={error} alt='not found'/>
                 </div>
@@ -44,25 +55,13 @@ const conditionRenderByResult = ()=>{
     }else{
         return (
             <div className="wrap-for-content">
-                {this.props.listOfMovie.length < 1 ? 
+                {this.props.movies.length < 1 ? 
                     <div className="wrap-logo"><img src={logo} alt="LOGO" /></div> 
-                        : <ListMovies listOfMovie={ this.props.listOfMovie } 
-                                    url = { this.props.listOfPictures }
-                                    similar = { this.props.listOfSimilarMovie }
-                                    setPicturesMovie = { this.props.setPicturesMovie }
-                                    setListMovie = { this.props.setListMovie }
-                                    setName = { this.props.setName }
-                                    setListSimilarMovie = { this.props.setListSimilarMovie }
-                                    name = { name }
-                                    trailers = { this.props.trailers }
-                                    setTrailerForMovie = { this.props.setTrailerForMovie }
-                                    setCurrentPage = { this.props.setCurrentPage }
-                                    rate = { this.props.rate }
-                                    setRateMovie = { this.props.setRateMovie }  />}
-                <Pagination moviePerPage = { this.props.moviePerPage }
-                            totalMovie = { this.props.listOfMovie.length }
-                            paginate = { paginate }
-                            currentPage = { this.props.currentPage}    />
+                        : <ListMovies movies={ this.props.movies }   />}
+                        <Pagination 
+                        // paginate = { paginate }
+                                    currentPage = { this.props.currentPage}
+                                    movies = {this.props.movies}    />
             </div>
         )
     }
@@ -75,27 +74,37 @@ const conditionRenderByResult = ()=>{
 }}
 
 const mapStateToProps = state =>{
-    return {
-        listOfMovie: state.listMovies.listOfMovie,
-        listOfPictures: state.listMovies.listOfPictures,
-        listOfSimilarMovie: state.listMovies.listOfSimilarMovie,
-        currentPage: state.listMovies.currentPage,
-        moviePerPage: state.listMovies.moviePerPage,
-        name: state.paramsMovies.name,
-        years: state.paramsMovies.years,
-        trailers: state.listMovies.trailers,
-        rate: state.listMovies.rate,
-        currentGenre: state.paramsMovies.currentGenre,
-    };
+return {
+    //Search Params
+        title: state.searchParams.title,
+        year: state.searchParams.year,
+        currentGenre: state.searchParams.genre,
+        sort: state.searchParams.sort,
+    //Lists
+        movies: state.lists.movies,
+        moviesCopy: state.lists.moviesCopy,
+        pictures: state.lists.pictures,
+        genres: state.lists.genres,
+        similars: state.lists.similars,
+    //Page Params
+        currentPage: state.pageParams.currentPage,
+        moviePerPage: state.pageParams.moviePerPage,
+};
 };
 const mapDispatchToProps = {
-    setCurrentPage,
-    setListMovie,
-    setName,
-    setPicturesMovie,
-    setListSimilarMovie,
-    setTrailerForMovie,
-    setRateMovie
+    //Search Params
+        setTitleAction,
+        setYearAction,
+        setGenreAction,
+        setSortAction,
+    //Lists
+        setMoviesAction,
+        setPicturesAction,
+        setSimilarsAction,
+        setGenresListAction,
+        setMoviesCopyAction,
+    //Page Params
+        setCurrentPageAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer)

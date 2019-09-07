@@ -6,7 +6,7 @@ export async function getListOfMovies(name, year, genres, currentPage){
             query: `${name}`,
             years: year ? `${year}` : '',
             genres: genres ? `${genres}` : '',
-            limit: 10,
+            limit: 15,
             page: currentPage,
             extended: 'full',
     };
@@ -18,7 +18,6 @@ export async function getListOfMovies(name, year, genres, currentPage){
         "trakt-api-version": 2,
     }
 });
-console.log(result.data)
 return result.data;
 }
 
