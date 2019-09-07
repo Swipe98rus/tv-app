@@ -43,12 +43,12 @@ const mapStateToProps = state =>{
             year: state.searchParams.year,
             currentGenre: state.searchParams.genre,
             sort: state.searchParams.sort,
+            page: state.searchParams.page,
         //Lists
             movies: state.lists.movies,
             moviesCopy: state.lists.moviesCopy,
             genres: state.lists.genres,
         //Page Params
-            currentPage: state.pageParams.currentPage,
     };
 };
 const mapDispatchToProps = {

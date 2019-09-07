@@ -4,10 +4,10 @@ import React from 'react';
 class Pagination extends React.Component{
 render(){
     const pageNumbers = {
-        'prev': this.props.currentPage -1,
-        'current': this.props.currentPage ,
-        'next': this.props.currentPage +1,
-        'mid': this.props.currentPage +2,
+        'prev': this.props.page -1,
+        'current': this.props.page ,
+        'next': this.props.page +1,
+        'mid': this.props.page +2,
     }; 
     const listPages = [pageNumbers.mid -2 , pageNumbers.mid -1, pageNumbers.mid, pageNumbers.mid +1, pageNumbers.mid +2   ]
 

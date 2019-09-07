@@ -16,10 +16,10 @@ class MovieInfo extends React.Component{
                 <h4>{rateOthers? rateOthers.Country : 'Searching..'}</h4>
                 <p>IMDB:  {rateIMDB ? rateIMDB : 'Searching..'}</p>
                 <p>
-                   {rateVerified[1] ? rateVerified[1].Source +': '+ rateVerified[1].Value : 'Searching..'}
+                   {rateVerified[1] ? rateVerified[1].Source +': '+ rateVerified[1].Value : 'Not found'}
                 </p>
                 <p>
-                    {rateVerified[2] ? rateVerified[2].Source +': '+ rateVerified[2].Value : 'Searching..'}
+                    {rateVerified[2] ? rateVerified[2].Source +': '+ rateVerified[2].Value : 'Not found'}
                 </p>
             </div>
         )

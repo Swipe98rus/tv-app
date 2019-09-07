@@ -9,7 +9,8 @@ class ListMovies extends React.Component{
             {
                 this.props.movies.map( (film, index) => {
                     return <Movie film = { film } 
-                                  key = { index }   />
+                                  key = { index }
+                                  searchingSimilar = {this.props.searchingSimilar}   />
                         })
             }
         </div>

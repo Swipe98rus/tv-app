@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ListMovies from './listMovies';
 import error from '../../img/error.svg';
 import logo from '../../img/logoMSND.svg';
-
+import { getAndBuildAllData } from '../helpFun';
 //Search Params
 import { 
     setTitleAction,
@@ -27,9 +27,16 @@ class  MovieContainer extends React.Component{
 render() {
 const paginate = async (pageNumber)=>{
     await this.props.setPageAction(pageNumber);
-    console.log(this.props.page)
+    const {title, year, currentGenre, page} = this.props;
+    const resultConstructor = await getAndBuildAllData( title, year, currentGenre, page );
+    this.props.setMoviesAction(resultConstructor);
+} 
+const searchingSimilar = async(e)=>{
+    await this.props.setTitleAction(e);
+    paginate(1);
 } 
 const { title, movies } = this.props;
+
 const conditionRenderByResult = ()=>{
     if( (title !== '' && movies.length === 0) ){
             return (
@@ -42,11 +49,14 @@ const conditionRenderByResult = ()=>{
     }else{
         return (
             <div className="wrap-for-content">
+
                 {this.props.movies.length < 1 ? 
                     <div className="wrap-logo"><img src={logo} alt="LOGO" /></div> 
-                        : <ListMovies movies={ this.props.movies }   />}
+                        : <ListMovies movies={ this.props.movies }
+                                      searchingSimilar = {searchingSimilar}   />}
+
                 {this.props.movies.length < 1 ? <div></div> : <Pagination paginate = { paginate }
-                                                                        currentPage = { this.props.currentPage}
+                                                                        page = { this.props.page}
                                                                         movies = {this.props.movies}    />}   
                 <div className="personalSign"><p>Created by Victor Ryabkov</p></div>     
             </div>
@@ -54,9 +64,7 @@ const conditionRenderByResult = ()=>{
     }
 }
     return(
-        <div>
-            { conditionRenderByResult() }
-        </div>
+            <div> { conditionRenderByResult() } </div>
     )
 }}
 
@@ -72,7 +80,6 @@ return {
         movies: state.lists.movies,
         genres: state.lists.genres,
     //Page Params
-        currentPage: state.pageParams.currentPage,
         moviePerPage: state.pageParams.moviePerPage,
 };
 };

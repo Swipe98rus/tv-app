@@ -24,7 +24,8 @@ render(){
                         rateIMDB = { film.rateIMDB }
                         rateOthers = { film.rateOthers }   />
 
-            <Similar similar={ film.similar }   />
+            <Similar similar={ film.similar }
+                     searchingSimilar = {this.props.searchingSimilar}    />
 
         </div>
     )

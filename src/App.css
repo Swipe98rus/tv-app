@@ -364,7 +364,9 @@
   min-height: 88vh;
   grid-template-rows: 1fr 60px;
 }
-
+.similarNotFound{
+  margin: 16px;
+}
 
 
 
