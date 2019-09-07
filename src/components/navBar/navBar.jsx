@@ -14,6 +14,8 @@ class NavBar extends React.Component{
 //---------------------------------------MAIN function-------------------------------------
 async searching(){
     this.props.state.setLoadStatusAction(false);
+    this.props.state.setPageAction(1);
+    this.props.state.setCurrentPageListAction([1,2,3,4,5])
     const titleValue = this.movieTitleRef.current.value;
     await this.props.state.setTitleAction(titleValue);
 

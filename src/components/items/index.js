@@ -19,7 +19,8 @@ import {
     setMoviesAction,
     setMoviesCopyAction,
  } from '../../redux/lists/actions';
-
+//Page params
+import { setCurrentPageListAction } from '../../redux/pageParams/actions'
 
 class  MovieContainer extends React.Component{
 render() {
@@ -31,6 +32,8 @@ const paginate = async (pageNumber)=>{
 } 
 const searchingSimilar = async(e)=>{
     await this.props.setTitleAction(e);
+    await this.props.setYearAction('');
+    await this.props.setGenreAction('')
     paginate(1);
 } 
 const { title, movies, status } = this.props;
@@ -58,7 +61,9 @@ const conditionRenderByResult = ()=>{
 
                 {this.props.movies.length < 1 ? <div></div> : <Pagination paginate = { paginate }
                                                                         page = { this.props.page}
-                                                                        movies = { movies }    />}   
+                                                                        movies = { movies }
+                                                                        setCurrentPageListAction = { this.props.setCurrentPageListAction }
+                                                                        currentPageList = { this.props.currentPageList }    />}   
                 <div className="personalSign"><p>Created by Victor Ryabkov</p></div>     
             </div>
         )
@@ -82,7 +87,7 @@ return {
         movies: state.lists.movies,
         genres: state.lists.genres,
     //Page Params
-        moviePerPage: state.pageParams.moviePerPage,
+        currentPageList: state.pageParams.currentPageList,
 };
 };
 const mapDispatchToProps = {
@@ -96,6 +101,7 @@ const mapDispatchToProps = {
         setMoviesAction,
         setMoviesCopyAction,
     //Page Params
+    setCurrentPageListAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer)

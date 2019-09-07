@@ -3,6 +3,7 @@ import React from 'react';
 class MovieInfo extends React.Component{
     render(){
         const rateOthers = this.props.rateOthers;
+        console.log(rateOthers)
         const rateIMDB = this.props.rateIMDB;
         let rateVerified;
         if(rateOthers){
@@ -13,7 +14,7 @@ class MovieInfo extends React.Component{
         return(
             <div className="movieInfo">
                 <h4>{ this.props.year }</h4>
-                <h4>{rateOthers? rateOthers.Country : 'Searching..'}</h4>
+                <h4>{ this.props.country }</h4>
                 <p>IMDB:  {rateIMDB ? rateIMDB : 'Searching..'}</p>
                 <p>
                    {rateVerified[1] ? rateVerified[1].Source +': '+ rateVerified[1].Value : 'Not found'}

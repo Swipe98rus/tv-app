@@ -21,6 +21,7 @@ render(){
             </div>
 
             <MovieInfo  year = { film.year }
+                        country = { film.country }
                         rateIMDB = { film.rateIMDB }
                         rateOthers = { film.rateOthers }   />
 
