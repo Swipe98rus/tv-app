@@ -14,8 +14,6 @@ import {
  //Lists
 import { 
     setMoviesAction,
-    setPicturesAction,
-    setSimilarsAction,
     setGenresListAction,
     setMoviesCopyAction,
  } from '../../redux/lists/actions';
@@ -31,6 +29,9 @@ async getAndSaveGenresList(){
 }
 render() {
     this.getAndSaveGenresList();
+    if(this.props.moviesCopy.length < 1){
+        this.props.setMoviesCopyAction(this.props.movies);
+    }
     return(
         <NavBar state = { this.props } />
     )
@@ -45,7 +46,6 @@ const mapStateToProps = state =>{
         //Lists
             movies: state.lists.movies,
             moviesCopy: state.lists.moviesCopy,
-            pictures: state.lists.pictures,
             genres: state.lists.genres,
         //Page Params
             currentPage: state.pageParams.currentPage,
@@ -59,8 +59,6 @@ const mapDispatchToProps = {
         setSortAction,
     //Lists
         setMoviesAction,
-        setPicturesAction,
-        setSimilarsAction,
         setGenresListAction,
         setMoviesCopyAction,
     //Page Params

@@ -13,7 +13,7 @@ const defaultState = {
     id:'',
     year:'',
     genre:'',
-    page:'',
+    page: 1,
     sort:''
 }
 

@@ -1,8 +1,6 @@
 /* eslint-disable default-case */
 import { 
     SAVE_MOVIES_STATE,
-    SAVE_PICTURES_STATE,
-    SAVE_SIMILARS_STATE,
     SAVE_GENRES_LIST_STATE,
     SAVE_MOVIES_COPY_STATE,
                             } from './actions'
@@ -10,8 +8,6 @@ import {
 const defaultState = {
     movies: [],
     moviesCopy: [],
-    pictures: [],
-    similars: [],
     genres:[],
 } 
 
@@ -21,16 +17,6 @@ export const updateListsReducers = (state = defaultState, action)=>{
             return {
                 ...state,
                 movies: action.payload,
-            }
-        case SAVE_PICTURES_STATE:
-            return {
-                ...state,
-                pictures: action.payload,
-            }
-        case SAVE_SIMILARS_STATE:
-            return {
-                ...state,
-                similars: action.payload,
             }
         case SAVE_MOVIES_COPY_STATE:
             return {

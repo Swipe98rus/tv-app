@@ -4,23 +4,19 @@ import { connect } from 'react-redux';
 import ListMovies from './listMovies';
 import error from '../../img/error.svg';
 import logo from '../../img/logoMSND.svg';
-// import { saveMovieList,
-//         savePicturesInState,
-//         startAllSaveFun } from '../navBar/helpFun/index'
+
 //Search Params
 import { 
     setTitleAction,
     setYearAction,
     setGenreAction,
     setSortAction,
+    setPageAction,
  } from '../../redux/searchParams/actions';
 
  //Lists
 import { 
     setMoviesAction,
-    setPicturesAction,
-    setSimilarsAction,
-    setGenresListAction,
     setMoviesCopyAction,
  } from '../../redux/lists/actions';
  //Page Params
@@ -29,20 +25,11 @@ import {
 
 class  MovieContainer extends React.Component{
 render() {
-
+const paginate = async (pageNumber)=>{
+    await this.props.setPageAction(pageNumber);
+    console.log(this.props.page)
+} 
 const { title, movies } = this.props;
-
-// const paginate = async (pageNumber)=>{
-//     this.props.setCurrentPage(pageNumber);
-//     const result = await saveMovieList( this.props.setListMovie, 
-//                                         this.props.years, 
-//                                         this.props.name, 
-//                                         this.props.currentGenre,
-//                                         pageNumber );
-//     await savePicturesInState( result, this.props.listOfPictures, this.props.setPicturesMovie );
-//     await startAllSaveFun( result, this.props.setListSimilarMovie, this.props.setTrailerForMovie, this.props.setRateMovie );
-// } 
-
 const conditionRenderByResult = ()=>{
     if( (title !== '' && movies.length === 0) ){
             return (
@@ -58,10 +45,10 @@ const conditionRenderByResult = ()=>{
                 {this.props.movies.length < 1 ? 
                     <div className="wrap-logo"><img src={logo} alt="LOGO" /></div> 
                         : <ListMovies movies={ this.props.movies }   />}
-                        <Pagination 
-                        // paginate = { paginate }
-                                    currentPage = { this.props.currentPage}
-                                    movies = {this.props.movies}    />
+                {this.props.movies.length < 1 ? <div></div> : <Pagination paginate = { paginate }
+                                                                        currentPage = { this.props.currentPage}
+                                                                        movies = {this.props.movies}    />}   
+                <div className="personalSign"><p>Created by Victor Ryabkov</p></div>     
             </div>
         )
     }
@@ -80,12 +67,10 @@ return {
         year: state.searchParams.year,
         currentGenre: state.searchParams.genre,
         sort: state.searchParams.sort,
+        page: state.searchParams.page,
     //Lists
         movies: state.lists.movies,
-        moviesCopy: state.lists.moviesCopy,
-        pictures: state.lists.pictures,
         genres: state.lists.genres,
-        similars: state.lists.similars,
     //Page Params
         currentPage: state.pageParams.currentPage,
         moviePerPage: state.pageParams.moviePerPage,
@@ -97,11 +82,9 @@ const mapDispatchToProps = {
         setYearAction,
         setGenreAction,
         setSortAction,
+        setPageAction,
     //Lists
         setMoviesAction,
-        setPicturesAction,
-        setSimilarsAction,
-        setGenresListAction,
         setMoviesCopyAction,
     //Page Params
         setCurrentPageAction,

@@ -259,7 +259,8 @@
 }
 .personalSign>p{
   font-size: 14px;
-  margin-bottom: 8px;
+  margin: 4px;
+
 }
 .wrap-logo{
   display: grid;
@@ -360,8 +361,8 @@
 }
 .wrap-for-content{
   display: grid;
-  min-height: 89vh;
-  grid-template-rows: 1fr 85px;
+  min-height: 88vh;
+  grid-template-rows: 1fr 60px;
 }
 
 

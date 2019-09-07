@@ -15,7 +15,7 @@ render(){
         <div>
             <div className='pagination'>
                 
-                { this.props.movies.length <1 ? <div></div> : <div className='listOfPage'>
+                <div className='listOfPage'>
                     <a className="pageLink prevButton"
                        key="prevPage"
                        onClick={(e)=>{ e.preventDefault();
@@ -34,10 +34,9 @@ render(){
                         key="nextPage" 
                         onClick={(e)=>{ e.preventDefault();
                         this.props.paginate(pageNumbers.next)}}>Next</a>
-                </div> }
+                </div> 
                 
             </div>
-            <div className="personalSign"><p>Created by Victor Ryabkov</p></div>
         </div>
     )
 }

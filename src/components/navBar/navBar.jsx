@@ -50,31 +50,22 @@ async getValueYears(e){
 
 
 async onChooseInput(e){
-    await this.props.toState.setSort( e.target.value );
-    const listForSort = [ ...this.props.toState.listOfMovie ];
+    await this.props.state.setSortAction( e.target.value );
+    const moviesForSorting = [ ...this.props.state.movies ];
     const sortMethod = (a, b)=>{
         //Return by oldest
-        return( a.movie.year - b.movie.year)
+        return( a.year - b.year)
     }
-    await listForSort.sort( sortMethod );
+    if(this.props.state.sort === 'Not sort'){
+        await this.props.state.setMoviesAction( this.props.state.moviesCopy );
 
-    if(this.props.toState.sort === 'Not sort'){
+    }else if(this.props.state.sort === 'By oldest'){
+        await moviesForSorting.sort( sortMethod );
+        await this.props.state.setMoviesAction( moviesForSorting );
 
-        await this.props.toState.setListMovie( this.props.toState.listOfMovieCopyForReset );
-        //This fun save all data for current movie
-        this.savePicturesSimilarTrailerRate( this.props.toState.listOfMovieCopyForReset);
-
-    }else if(this.props.toState.sort === 'By oldest'){
-
-        await this.props.toState.setListMovie( listForSort );
-        //This fun save all data for current movie
-        this.savePicturesSimilarTrailerRate( listForSort );
-    }else if(this.props.toState.sort === 'By newest'){
-
-        await listForSort.reverse();
-        await this.props.toState.setListMovie( listForSort );
-        //This fun save all data for current movie
-        this.savePicturesSimilarTrailerRate( listForSort );
+    }else if(this.props.state.sort === 'By newest'){
+        await moviesForSorting.sort( sortMethod );
+        await this.props.state.setMoviesAction( moviesForSorting.reverse() );
     }
 }
 async onChooseGenre(e){
@@ -96,7 +87,7 @@ render() {
                              onSearchClickYears={ (e)=>{ this.onEnterClick(e) }}/>
 
                 <NavBarGenres genres={this.props.state.genres}
-                              onChooseGenre={(e)=>{this.onChooseGenre(e)}}/>
+                              onChooseGenre={(e)=>{ this.onChooseGenre(e) }}/>
 
                 <NavBarSort onChooseInput={ (e)=>{ this.onChooseInput(e) }}/>
 
