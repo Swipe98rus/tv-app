@@ -14,7 +14,7 @@ preloader(){
             this.preloaderRef.current.style.opacity = '0';
             this.preloaderRef.current.style.visibility = 'hidden';
         }
-    }, 1000 )
+    }, 300 )
 };
 openYoutubePlayeer(){
     this.overlayRef.current.style.display = 'block';

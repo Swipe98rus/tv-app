@@ -12,6 +12,7 @@ import {
     setGenreAction,
     setSortAction,
     setPageAction,
+    setLoadStatusAction,
  } from '../../redux/searchParams/actions';
 
  //Lists
@@ -25,10 +26,12 @@ import { setCurrentPageListAction } from '../../redux/pageParams/actions'
 class  MovieContainer extends React.Component{
 render() {
 const paginate = async (pageNumber)=>{
+    this.props.setLoadStatusAction(false);
     await this.props.setPageAction(pageNumber);
     const {title, year, currentGenre, page} = this.props;
     const resultConstructor = await getAndBuildAllData( title, year, currentGenre, page );
     this.props.setMoviesAction(resultConstructor);
+    this.props.setLoadStatusAction(true);
 } 
 const searchingSimilar = async(e)=>{
     await this.props.setTitleAction(e);
@@ -50,6 +53,7 @@ const conditionRenderByResult = ()=>{
     }else{
         return (
             <div className="wrap-for-content">
+                <div className={ status? "loadingLine" : "loadingLine loadingLineActive"}></div>
 
                 {this.props.movies.length < 1 ? 
                     <div className="wrap-logo">
@@ -64,7 +68,9 @@ const conditionRenderByResult = ()=>{
                                                                         movies = { movies }
                                                                         setCurrentPageListAction = { this.props.setCurrentPageListAction }
                                                                         currentPageList = { this.props.currentPageList }    />}   
-                <div className="personalSign"><p>Created by Victor Ryabkov</p></div>     
+                <div className="personalSign">
+                    <p>Created by Victor Ryabkov</p>
+                </div>
             </div>
         )
     }
@@ -97,11 +103,12 @@ const mapDispatchToProps = {
         setGenreAction,
         setSortAction,
         setPageAction,
+        setLoadStatusAction,
     //Lists
         setMoviesAction,
         setMoviesCopyAction,
     //Page Params
-    setCurrentPageListAction,
+        setCurrentPageListAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer)

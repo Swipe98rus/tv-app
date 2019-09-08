@@ -48,7 +48,7 @@ async getValueYears(e){
         await this.props.state.setYearAction( e.target.value );
     // eslint-disable-next-line no-cond-assign
     }else if( valueLength === 0 ){
-        await this.props.state.setYearsAction('');
+        await this.props.state.setYearAction('');
     }
 }
 
@@ -97,6 +97,7 @@ render() {
 
                 <button className="search_button"
                         onClick={(e)=>{this.onButtonClick(e)}}>Search</button>
+
         </div>
     )
 }}

@@ -3,7 +3,6 @@ import React from 'react';
 class MovieInfo extends React.Component{
     render(){
         const rateOthers = this.props.rateOthers;
-        console.log(rateOthers)
         const rateIMDB = this.props.rateIMDB;
         let rateVerified;
         if(rateOthers){

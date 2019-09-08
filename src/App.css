@@ -25,10 +25,18 @@
   justify-items: center;
   margin-bottom: 13px;
 }
-.wrapSort,
 .wrapYearsForm>label{
   color: silver;
   font-size: 12px;
+}
+.wrapSort>select{
+  appearance: none;
+  background-color: white;
+  margin-bottom: 15px;
+}
+.wrapSort>select:hover{
+  transition: 0.15s all;
+  background: rgba(255, 255, 255, 0.8);
 }
 .wrapYearsForm>input{
   width: 145px;
@@ -250,18 +258,6 @@
   background-color: silver;
   color: black;
 }
-.personalSign{
-  background: black;
-  color: silver;
-  display: grid;
-  align-items: center;
-  justify-content: center;
-}
-.personalSign>p{
-  font-size: 14px;
-  margin: 4px;
-
-}
 .wrap-logo{
   display: grid;
   justify-content: center;
@@ -399,10 +395,73 @@
 .wrap-for-content{
   display: grid;
   min-height: 88vh;
-  grid-template-rows: 1fr 60px;
+  grid-template-rows: 2px 1fr 60px;
 }
 .similarNotFound{
   margin: 16px;
+}
+.personalSign{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+}
+.personalSign>p{
+  font-size: 12px;
+  margin: 4px;
+  color:silver;
+}
+.loadingLine{
+  width: 10%;
+  height: 0px;
+  background: rgba(0,0,0,0);
+}
+.loadingLineActive{
+  animation: loadLine 3s infinite;
+}
+@keyframes loadLine{
+  0%{
+    width: 10%;
+    background: red;
+    justify-self: flex-start;
+    height: 4px;
+  }
+  25%{
+    width: 100%;
+    background: red;
+    justify-self: flex-start;
+    height: 4px;
+  }
+  26%{
+    justify-self: flex-end;
+    width: 100%;
+    background: red;
+    height: 4px;
+  }
+  50%{
+    width: 10%;
+    background: red;
+    justify-self: flex-end;
+    height: 4px;
+  }
+  75%{
+    width: 100%;
+    background: red;
+    justify-self: flex-end;
+    height: 4px;
+  }
+  76%{
+    width: 100%;
+    background: red;
+    justify-self: flex-start;
+    height: 4px;
+  }
+  100%{
+    width: 10%;
+    background: red;
+    justify-self: flex-start;
+    height: 4px;
+  }
 }
 
 
@@ -410,7 +469,7 @@
 @media (max-width: 500px){
 
   .setting{
-    height: 320px;
+    height: 335px;
     grid-auto-flow: row;
   }
   .OneOfMovie{
@@ -430,7 +489,7 @@
     display: none;
   }
   .moviePoster{
-    height: 390px;
+    height: 375px;
     width: 251px;
     margin: auto;
   }
@@ -447,7 +506,7 @@
     width: 250px;
   }
   .preloader{
-    top: 7px;
+    top: 0px;
     width: 250px;
     height: 375px;
   }
@@ -506,7 +565,7 @@
   }
   .wrap-for-content{
     min-height: 57vh;
-    grid-template-rows: 1fr 75px;
+    grid-template-rows: 2px 1fr 60px;
   }
   .pageLink{
     padding: 6px 12px;
@@ -515,6 +574,6 @@
 
 @media(min-width: 1600px){
   .wrap-for-content{
-    min-height: 90vh;
+    min-height: 90.4vh;
   }
 }
