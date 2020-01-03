@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/tv-app/static/css/main.6cc4c489.chunk.css",
+    "main.js": "/tv-app/static/js/main.a7108026.chunk.js",
+    "main.js.map": "/tv-app/static/js/main.a7108026.chunk.js.map",
+    "runtime~main.js": "/tv-app/static/js/runtime~main.c50f7507.js",
+    "runtime~main.js.map": "/tv-app/static/js/runtime~main.c50f7507.js.map",
+    "static/js/2.f6488f3c.chunk.js": "/tv-app/static/js/2.f6488f3c.chunk.js",
+    "static/js/2.f6488f3c.chunk.js.map": "/tv-app/static/js/2.f6488f3c.chunk.js.map",
+    "index.html": "/tv-app/index.html",
+    "precache-manifest.f2374a2cee4f358dd94342f6d39d36fd.js": "/tv-app/precache-manifest.f2374a2cee4f358dd94342f6d39d36fd.js",
+    "service-worker.js": "/tv-app/service-worker.js",
+    "static/css/main.6cc4c489.chunk.css.map": "/tv-app/static/css/main.6cc4c489.chunk.css.map",
+    "static/media/error.svg": "/tv-app/static/media/error.533ab57e.svg",
+    "static/media/logoMSND.svg": "/tv-app/static/media/logoMSND.7fc557fe.svg"
+  }
+}
