@@ -13,7 +13,7 @@
 		"react-scripts": "3.1.1",
 		"redux": "^4.0.4"
 	},
-	"homepage": "https://swipe98rus.github.io/tv-app/",
+	"homepage": "http://www.moiskillnadne.tv.com/",
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
